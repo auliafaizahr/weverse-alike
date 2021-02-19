@@ -10,6 +10,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <section class="section">
+        <div class="container-lg">
+          <%= render 'layouts/navbar' %>
+          <div class="row mt-5">
+            <%= render 'layouts/left_sidebar' %>
+            <div class="col-lg-6 col-md-6">
+              <%= yield %>
+            </div>
+            <%= render 'layouts/right_sidebar' %>
+          </div>
+        </div>
+      </section>
+    <% else %>
+      <%= render 'devise/sessions/new' %>
+    <% end %>
   </body>
 </html>

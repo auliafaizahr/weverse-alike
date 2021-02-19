@@ -1,0 +1,92 @@
+.card {
+  .card_post_wrapper {
+    border-bottom: solid .5px #EBEBEB;
+    padding-bottom: 1em;
+  }
+
+  .input_post {
+    width: 100%;
+  }
+
+  textarea {
+    border: none;
+    height: 3em;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .btn-submit-post {
+    border-radius: 50em;
+    background-color: #0BE4BF;
+    border: none;
+  }
+
+  .icon-wv {
+    color: #0BE4BF;
+    height: 1.5em;
+  }
+}
+
+.left-sidebar {
+  ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.3em;
+  }
+}
+
+.moment_index {
+  .img-moment {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+}
+
+.post-user {
+  ul.menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    color: #BDC0C5;
+  }
+
+  ul.user {
+    list-style: none;
+    padding: 0;
+
+    li.username {
+      font-size: 15px;
+    }
+
+    li.date_post {
+      font-size: 13px;
+      color: #BDC0C5;
+    }
+  }
+
+  ul.cheers {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    border-bottom: 1px solid #EBEBEB;
+    border-top: 1px solid #EBEBEB;
+    color: #ADB1B8;
+  }
+}
+
+.comment_posted {
+  ul.comment {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    font-size: 12px;
+  }
+
+  .comment_box {
+    background-color: #F5F7FA;
+    border-radius: 10px;
+  }
+}

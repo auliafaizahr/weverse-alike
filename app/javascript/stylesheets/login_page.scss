@@ -1,0 +1,27 @@
+.img-login {
+  position: fixed;
+  top: -500px;
+}
+
+.form-group {
+
+  label {
+    color: darkgray;
+    font-weight: 800;
+  }
+
+  .input-form {
+    border-width: 0 0 1px 0;
+    border-bottom: 1px gray solid;
+    border-radius: 0;
+  }
+
+}
+
+.submit_btn_login {
+  width: 100%;
+  border: none;
+  padding: 1em;
+  background-color: #E07700;
+  color: white;
+}
