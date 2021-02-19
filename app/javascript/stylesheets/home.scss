@@ -2,6 +2,13 @@
   .card_post_wrapper {
     border-bottom: solid .5px #EBEBEB;
     padding-bottom: 1em;
+
+    img.profile_picture {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
   }
 
   .input_post {
@@ -88,5 +95,12 @@
   .comment_box {
     background-color: #F5F7FA;
     border-radius: 10px;
+  }
+
+  img.profile_picture {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }
