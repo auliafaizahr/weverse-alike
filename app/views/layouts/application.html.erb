@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="container-lg">
+        <p class="alert alert-success" role="alert"> <%= notice %> </p>
+      </div>
+      <% flash.clear %>
+    <% elsif flash[:alert] %>
+      <div class="container-lg">
+        <p class="alert alert-danger" role="alert"> <%= alert %> </p>
+      </div>
+      <% flash.clear %>
+    <% end %>
     <% if user_signed_in? %>
       <section class="section">
         <div class="container-lg">

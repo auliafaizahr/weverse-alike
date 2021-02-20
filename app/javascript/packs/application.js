@@ -18,6 +18,7 @@ require("@fortawesome/fontawesome-free/scss/fontawesome.scss")
 require("@fortawesome/fontawesome-free/js/all.js")
 
 import './home'
+import './alert'
 
 window.jQuery = $;
 window.$ = $;
