@@ -60,6 +60,13 @@
     color: #BDC0C5;
   }
 
+  img.profile_picture {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
   ul.user {
     list-style: none;
     padding: 0;
@@ -102,5 +109,15 @@
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  .input_comment {
+    background-color: #F5F7FA;
+    border: none;
+  }
+
+  .comment_button {
+    color: #0BE4BF;
+    border: none;
   }
 }

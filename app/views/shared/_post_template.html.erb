@@ -2,7 +2,9 @@
   <div class="card-body">
     <h5 class="card-title">Moments</h5>
     <div class="row">
-      <div class="col-2">PP</div>
+      <div class="col-2">
+        <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+      </div>
       <div class="col-7">
         <ul class="user">
           <li class="username">Username</li>
@@ -36,6 +38,7 @@
         <% 3.times do %>
           <%= render 'shared/comments' %>
         <% end %>
+        <%= render  'shared/new_comment' %>
       </div>
     </div>
   </div>
