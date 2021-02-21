@@ -5,8 +5,11 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    super
-    render 'users/sessions/new'
+    # super
+    @user = User.new
+    respond_to do |format|
+      format.html { render 'users/sessions/new' }
+    end
   end
 
   # POST /resource/sign_in

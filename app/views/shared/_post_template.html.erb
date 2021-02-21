@@ -90,7 +90,23 @@
           <% 3.times do %>
             <%= render 'shared/comments' %>
           <% end %>
-          <%= render  'shared/new_comment' %>
+          <div class="row comment_posted">
+          <div class="col-2">
+            <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+          </div>
+          <div class="col-10">
+            <div class="row input-group mb-3 comment_box">
+              <%= simple_form_for([post, post.comments.build]) do |f| %>
+                <%= f.input :comment, class: "form-control input_comment", placeholder: "Write your comment" %>
+                <div class="input-group-append">
+                <%= f.submit "Send", class: "btn btn-outline-secondary comment_button"  %>
+              </div>
+              <% end %>
+              </div>
+            </div>
+          </div>
+          </div>
+          <%# <%= render 'shared/new_comment',  post: post  %> %>
         </div>
       </div>
     </div>

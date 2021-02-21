@@ -12,7 +12,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    binding.pry
     respond_to do |format|
       if @post.save
         format.html { redirect_to root_path, notice: 'Tweet was successfully created.' }

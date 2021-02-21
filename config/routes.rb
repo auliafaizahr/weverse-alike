@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
 
   root 'posts#index'
 

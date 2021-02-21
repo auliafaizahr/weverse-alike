@@ -35,7 +35,8 @@
         </div>
       </section>
     <% else %>
-      <%= render 'devise/sessions/new' %>
+      <%= yield %>
+      <%# <%= render 'users/sessions/new' %> %>
     <% end %>
   </body>
 </html>
