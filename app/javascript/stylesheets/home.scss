@@ -1,3 +1,9 @@
+textarea {
+  &:focus {
+    outline: none;
+  }
+}
+
 .card {
   .card_post_wrapper {
     border-bottom: solid .5px #EBEBEB;

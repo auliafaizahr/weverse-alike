@@ -1,49 +1,3 @@
-<!--<div class="card mt-4 post-user">
-  <div class="card-body">
-    <h5 class="card-title">Moments</h5>
-    <div class="row">
-      <div class="col-2">
-        <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
-      </div>
-      <div class="col-7">
-        <ul class="user">
-          <li class="username">Username</li>
-          <li class="date_post">Tanggal</li>
-        </ul>
-      </div>
-      <div class="col-3">
-        <ul class="menu">
-          <li><i class="fas fa-language"></i></li>
-          <li><i class="fas fa-ellipsis-v"></i></li>
-        </ul>
-      </div>
-    </div>
-    <div class="row posted">
-      <div class="col"></div>
-    </div>
-    <div class="row cheers">
-      <div class="col">
-        <ul class="cheers py-2">
-          <li class="mr-4">
-            <i class="fas fa-heart"></i> <span>Cheers</span>
-          </li>
-          <li class="mr-4">
-            <i class="far fa-comment"></i> <span>Comments</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <% 3.times do %>
-          <%= render 'shared/comments' %>
-        <% end %>
-        <%= render  'shared/new_comment' %>
-      </div>
-    </div>
-  </div>
-</div>-->
-
 <% @posts.each do |post| %>
   <div class="card mt-4 post-user">
     <div class="card-body">
@@ -95,18 +49,19 @@
             <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
           </div>
           <div class="col-10">
-            <div class="row input-group mb-3 comment_box">
-              <%= simple_form_for([post, post.comments.build]) do |f| %>
-                <%= f.input :comment, class: "form-control input_comment", placeholder: "Write your comment" %>
-                <div class="input-group-append">
-                <%= f.submit "Send", class: "btn btn-outline-secondary comment_button"  %>
+            <%= simple_form_for([post, post.comments.build]) do |f| %>
+              <div class="row input-group mb-3 comment_box">
+                  <%= f.text_area :comment, class: "form-control input_comment", placeholder: "Write your comment" %>
+                  <%= f.hidden_field :user_id, value: current_user.id %>
+                  <div class="input-group-append">
+                    <%= f.button :submit, "Send", class: "btn btn-outline-secondary comment_button"  %>
+                  </div>
               </div>
-              <% end %>
-              </div>
+            <% end %>
             </div>
           </div>
           </div>
-          <%# <%= render 'shared/new_comment',  post: post  %> %>
+          <%# <%= render 'shared/new_comment',  post: post  %>
         </div>
       </div>
     </div>
