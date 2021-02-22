@@ -5,14 +5,14 @@
   <div class="col-10">
     <div class="row" style="width: 100%;">
       <div class="col py-3 comment_box">
-        komen
+        <%= comment.comment %>
       </div>
     </div>
     <div class="row col pt-2">
       <ul class="comment">
         <li class="mr-3"><i class="far fa-thumbs-up"></i></li>
         <li class="mr-3">translate</li>
-        <li class="mr-3">tanggal</li>
+        <li class="mr-3"><%= comment.created_at.localtime.to_formatted_s(:long) %></li>
       </ul>
     </div>
   </div>

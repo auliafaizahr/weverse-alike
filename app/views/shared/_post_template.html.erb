@@ -41,8 +41,10 @@
       </div>
       <div class="row">
         <div class="col">
-          <% 3.times do %>
-            <%= render 'shared/comments' %>
+          <% if post.comments %>
+            <% post.comments.each do |comment| %>
+              <%= render 'shared/comments', comment: comment %>
+            <% end %>
           <% end %>
           <div class="row comment_posted">
           <div class="col-2">
