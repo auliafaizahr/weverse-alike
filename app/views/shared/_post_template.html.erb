@@ -4,7 +4,11 @@
       <h5 class="card-title">Moments</h5>
       <div class="row">
         <div class="col-2">
-          <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class: 'profile_picture' %>
+          <% else %>
+            <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+          <% end %>
         </div>
         <div class="col-7">
           <ul class="user">
@@ -30,11 +34,16 @@
       <div class="row cheers">
         <div class="col">
           <ul class="cheers py-2">
-            <li class="mr-4">
+            <li class="mr-4 cheers_button">
               <i class="fas fa-heart"></i> <span>Cheers</span>
             </li>
             <li class="mr-4">
-              <i class="far fa-comment"></i> <span>Comments</span>
+              <i class="far fa-comment cheers_button"></i>
+                <% if post.comments.any? %>
+                  <%= post.comments.size %> <span>Comments</span>
+                <% else %>
+                  <span>Comment First</span>
+                <% end %>
             </li>
           </ul>
         </div>
@@ -71,5 +80,4 @@
         </div>
       </div>
     </div>
-  </div>
 <% end %>
