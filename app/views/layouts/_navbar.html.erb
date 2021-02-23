@@ -14,7 +14,7 @@
   <div class="col-lg-6 col-md-6 justify-content-end">
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <%= link_to root_path, class: "nav-link" do %>
+        <%= link_to edit_profiles_path, class: "nav-link" do %>
           <i class="fas fa-user"></i>
         <% end %>
       </li>
@@ -24,9 +24,19 @@
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to root_path, class: "nav-link" do %>
-          <i class="fas fa-ellipsis-h"></i>
-        <% end %>
+        <div class="dropdown">
+          <button type="button" class="nav-link navbar_button_dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-h" data-toggle="dropdown" id="dropdon"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+        
       </li>
     </ul>
   </div>

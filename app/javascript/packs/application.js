@@ -17,10 +17,11 @@ require("bootstrap")
 require("@fortawesome/fontawesome-free/scss/fontawesome.scss")
 require("@fortawesome/fontawesome-free/js/all.js")
 
+window.jQuery = $;
+window.$ = $;
+
 import './home'
 import './alert'
 
-window.jQuery = $;
-window.$ = $;
 
 

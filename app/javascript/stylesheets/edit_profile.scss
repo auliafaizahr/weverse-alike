@@ -1,0 +1,18 @@
+.form_edit_profile {
+  input[type=text], input[type=email], input[type=password] {
+    border: none;
+    width: 100%;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+  
+  .edit_profile_button {
+    width: 100%;
+    border: none;
+    padding: 1em;
+    background-color: #E07700;
+    color: white;
+  }
+}

@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    binding.pry
     @comment = @post.comments.build(comment_params)
     respond_to do |format|
       if @comment.save

@@ -47,17 +47,21 @@
             <% end %>
           <% end %>
           <div class="row comment_posted">
-          <div class="col-2">
-            <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
-          </div>
-          <div class="col-10">
-            <%= simple_form_for([post, post.comments.build]) do |f| %>
-              <div class="row input-group mb-3 comment_box">
+            <div class="col-2">
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar, class: 'profile_picture' %>
+              <% else %>
+                <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+              <% end %>
+            </div>
+            <div class="col-10">
+              <%= simple_form_for([post, post.comments.build]) do |f| %>
+                <div class="row input-group mb-3 comment_box">
                   <%= f.text_area :comment, class: "form-control input_comment", placeholder: "Write your comment" %>
                   <%= f.hidden_field :user_id, value: current_user.id %>
                   <div class="input-group-append">
-                    <%= f.button :submit, "Send", class: "btn btn-outline-secondary comment_button"  %>
-                  </div>
+                  <%= f.button :submit, "Send", class: "btn btn-outline-secondary comment_button"  %>
+                </div>
               </div>
             <% end %>
             </div>

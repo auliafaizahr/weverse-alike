@@ -5,7 +5,11 @@
         <div class="card_post_wrapper">
           <div class="row">
             <div class="col-2">
-              <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar, class: 'profile_picture' %>
+              <% else %>
+                <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+              <% end %>
             </div>
             <div class="col-10">
               <%= f.text_area :post,
