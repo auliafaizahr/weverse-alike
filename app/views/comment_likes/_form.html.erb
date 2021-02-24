@@ -1,0 +1,7 @@
+<div id="comment_like-form_<%= comment.id %>">
+  <% if user_signed_in? && current_user.likes?(comment) %>
+    <%= render 'comment_likes/unlike', comment: comment %>
+  <% else %>
+    <%= render 'comment_likes/like', comment: comment %>
+  <% end %>
+</div>

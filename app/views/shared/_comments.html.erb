@@ -14,7 +14,9 @@
     </div>
     <div class="row col pt-2">
       <ul class="comment">
-        <li class="mr-3"><i class="far fa-thumbs-up"></i></li>
+        <li class="mr-3">
+          <%= render 'comment_likes/form', comment: comment %>
+        </li>
         <li class="mr-3">translate</li>
         <li class="mr-3"><%= comment.created_at.localtime.to_formatted_s(:long) %></li>
       </ul>

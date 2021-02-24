@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resource :profiles
 
   resources :posts do
-    resources :comments
+    resources :comments do
+      resource :likes, only: %i[create destroy]
+    end
+
     resources :likes, only: %i[create destroy]
   end
 

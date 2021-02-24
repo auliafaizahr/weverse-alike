@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def likes?(post)
     post.likes.where(user_id: id).any?
   end
+
+  # def comment_likes?(comment)
+  #   post.likes.where(user_id: id).any?
+  # end
 end
