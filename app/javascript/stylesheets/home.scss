@@ -127,3 +127,15 @@ textarea {
     border: none;
   }
 }
+
+.lni-heart-filled {
+  color: pink;
+}
+
+.fa-heart {
+  color: #ADB1B8;
+
+  &.heart-filled {
+    color: #0BE4BF;
+  }
+}

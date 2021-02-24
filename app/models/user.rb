@@ -11,4 +11,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   enum type_user: [:Artist, :User]
+
+  def likes?(post)
+    post.likes.where(user_id: id).any?
+  end
 end
