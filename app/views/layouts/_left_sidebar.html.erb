@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-md-3 col-sm-12 pl-5 left-sidebar">
-  <h3 class="font-weight-bold">TOMORROW X TOGETHER</h3 >
-  <p>3juta Wevers</p>
+  <h3 class="font-weight-bold"><%= @group.name.upcase %></h3 >
+  <p><%= @group.users.size %> Wevers </p>
   <div class="row">
     <div class="col">
       foto
@@ -11,8 +11,8 @@
     <div class="col">
       <ul>
         <li class="mb-3">
-          <%= link_to  "Feed", group_user_feed_users_path(1, current_user.id) %>
-        Feed</li>
+          <%= link_to  "Feed", group_path(1) %>
+        </li>
         <li class="mb-3">Artist</li>
         <li class="mb-3">Media</li>
         <li class="mb-3">Wevers Only</li>

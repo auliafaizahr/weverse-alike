@@ -5,7 +5,19 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :groups
+  resources :front_pages
+  
   resources :groups do
+    resources :posts do
+      resources :comments do
+        resource :likes, only: %i[create destroy]
+      end
+  
+      resources :likes, only: %i[create destroy]
+    end
+    
+    resources :users
     resources :users do
       resources :feed_users
       resources :feed_artists
@@ -14,13 +26,6 @@ Rails.application.routes.draw do
   end
   resource :profiles
 
-  resources :posts do
-    resources :comments do
-      resource :likes, only: %i[create destroy]
-    end
-
-    resources :likes, only: %i[create destroy]
-  end
 
   root 'posts#index'
 
