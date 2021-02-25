@@ -10,7 +10,9 @@
   <div class="row mt-4">
     <div class="col">
       <ul>
-        <li class="mb-3">Feed</li>
+        <li class="mb-3">
+          <%= link_to  "Feed", group_user_feed_users_path(1, current_user.id) %>
+        Feed</li>
         <li class="mb-3">Artist</li>
         <li class="mb-3">Media</li>
         <li class="mb-3">Wevers Only</li>

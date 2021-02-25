@@ -5,6 +5,13 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :groups do
+    resources :users do
+      resources :feed_users
+      resources :feed_artists
+      resources :medias
+    end
+  end
   resource :profiles
 
   resources :posts do

@@ -1,0 +1,2 @@
+class FeedUsersController < ApplicationController
+end
