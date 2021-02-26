@@ -1,4 +1,4 @@
-<% @posts.each do |post| %>
+<% posts.each do |post| %>
   <div class="card mt-4 post-user">
     <div class="card-body">
       <h5 class="card-title">Moments</h5>
@@ -31,6 +31,22 @@
           <ul class="cheers py-2">
             <li class="mr-4 cheers_button">
               <%# <%= render 'shared/likes/form', post: post %> %>
+              <div id="like-form_<%= post.id %>">
+                <% if user_signed_in? && current_user.likes?(post) %>
+                  <%= render 'shared/likes/unlike', post: post %>
+                <% else %>
+                <% binding.pry %>
+                <%= link_to polymorphic_path([@likeable, Like]), method: :post, remote: true do  %>
+                  <i class="fas fa-heart"></i>
+                <% end %>
+                <% end %>
+
+                <% if post.likes.any? %>
+                  <%= post.likes.size %> <span>Cheers</span>
+                <% else %>
+                  <span>Cheers First</span>
+                <% end %>
+              </div>
             </li>
             <li class="mr-4">
               <i class="far fa-comment cheers_button"></i>
@@ -44,7 +60,6 @@
         </div>
       </div>
       <div class="row">
-        
           <%# <%= render 'shared/new_comment',  post: post  %>
         </div>
       </div>

@@ -1,13 +1,13 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_likeable, only: %i[create destroy]
+  before_action :set_likeable, only: [:create, :destroy]
 
   def create
     if @post
       respond_to do |format|
         if @post.likes.where(user_id: current_user.id).first_or_create
           format.html { redirect_to root_path }
-          format.js
+          format. js { render "likes/create.js" }
         end
       end
     else
@@ -25,7 +25,7 @@ class LikesController < ApplicationController
       @post.likes.find_by(likeable_id: params[:post_id]).destroy
       respond_to do |format|
         format.html { redirect_to root_path }
-        format.js
+        format.js { render "likes/destroy.js" }
       end
     else
       @comment.likes.find_by(likeable_id: params[:comment_id]).destroy

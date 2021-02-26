@@ -7,16 +7,24 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :front_pages
-  
+
+  resources :posts do
+    resources :likes, only: [:create, :destroy]
+  end
+
+  resources :likes, only: [:create, :destroy]
+
+
   resources :groups do
+    resources :posts
+
     resources :posts do
+      resources :likes, only: [:create, :destroy]
       resources :comments do
-        resource :likes, only: %i[create destroy]
+        resource :likes, only: %i[create, destroy]
       end
-  
-      resources :likes, only: %i[create destroy]
     end
-    
+
     resources :users
     resources :users do
       resources :feed_users
@@ -25,8 +33,7 @@ Rails.application.routes.draw do
     end
   end
   resource :profiles
-
-
+  
   root 'posts#index'
 
 end
