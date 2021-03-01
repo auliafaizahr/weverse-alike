@@ -3,16 +3,14 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show]
 
   def index
-    # @posts = Post.all
   end
 
   def show
     set_group
-    @posts = @group.posts
-    # @post = @group.posts.new(post_params)
+    # @posts = @group.posts
     @user = current_user
     respond_to do |format|
-      format.html
+      format.html 
     end
   end
 

@@ -1,26 +1,32 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:create, :new]
+  before_action :set_group, only: [:index, :create, :new]
 
   def index
-    @posts = Post.all
-    @post = Post.new
+    # binding.pry
+    @posts = @group.posts
+    # @post = @group.posts.build
     @user = current_user
+    respond_to do |format|
+      format.html
+    end
   end
 
   def new
-    @post = Post.new
+    @post = @group.posts.build(post_params)
   end
 
   def create
-    @post = @group.posts.new(post_params)
+    binding.pry
+    # @post = @group.posts.new(post_params)
+    @post = @group.posts.build(post_params)
     @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
-        format.html { redirect_to group_path(@group), notice: 'Post was successfully created.' }
+        format.html { redirect_to group_posts_path(@group), notice: 'Post was successfully created.' }
         format.json { render :index, status: :created, location: @post }
       else
-        format.html { redirect_to group_path(@group), alert: 'Failed to create post.' }
+        format.html { redirect_to group_posts_path(@group), alert: 'Failed to create post.' }
       end
     end
   end

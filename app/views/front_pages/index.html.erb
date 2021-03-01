@@ -4,7 +4,7 @@
   <div class="col row d-flex flex-row">
     <% @groups.each do |group| %>
       <div class="col-lg-3 col-md-6 col-sm-12 my-3">
-        <%= link_to group_path(group) do %>
+        <%= link_to group_posts_path(group) do %>
           <div class="card">
             <%= image_tag 'login.jpg', style: "width: 100%;" %>
             <div class="card-body">

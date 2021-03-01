@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :join_groups
   has_many :groups, through: :join_groups
+  has_many :post_likes
 
   has_one_attached :avatar
 

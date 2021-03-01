@@ -6,14 +6,14 @@ class LikesController < ApplicationController
     if @post
       respond_to do |format|
         if @post.likes.where(user_id: current_user.id).first_or_create
-          format.html { redirect_to root_path }
+          format.html { redirect_to group_posts_path(@group) }
           format. js { render "likes/create.js" }
         end
       end
     else
       respond_to do |format|
         if @comment.likes.where(user_id: current_user.id).first_or_create
-          format.html { redirect_to root_path }
+          format.html { redirect_to group_posts_path(@group) }
           format.js { render "comment_likes/create.js" }
         end
       end
@@ -24,13 +24,13 @@ class LikesController < ApplicationController
     if @post
       @post.likes.find_by(likeable_id: params[:post_id]).destroy
       respond_to do |format|
-        format.html { redirect_to root_path }
+        format.html { redirect_to group_posts_path(@group) }
         format.js { render "likes/destroy.js" }
       end
     else
       @comment.likes.find_by(likeable_id: params[:comment_id]).destroy
       respond_to do |format|
-        format.html { redirect_to root_path }
+        format.html { redirect_to group_posts_path(@group) }
         format.js { render "comment_likes/destroy.js" }
       end
     end
@@ -38,10 +38,15 @@ class LikesController < ApplicationController
 
   private
   def set_likeable
+    set_group
     if params[:comment_id]
       @comment = Comment.find(params[:comment_id])
     else
-      @post = Post.find(params[:post_id])
+      @post = @group.posts.find(params[:post_id])
     end
+  end
+
+  def set_group
+    @group = Group.find(params[:group_id])
   end
 end

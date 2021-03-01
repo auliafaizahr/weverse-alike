@@ -2,9 +2,7 @@
   <% if user_signed_in? && current_user.likes?(post) %>
     <%= render 'shared/likes/unlike', post: post %>
   <% else %>
-    <%= link_to post_likes_path(post), method: :post, remote: true do  %>
-      <i class="fas fa-heart"></i>
-    <% end %>
+    <%= render 'shared/likes/like', post: post %>
   <% end %>
 
   <% if post.likes.any? %>
