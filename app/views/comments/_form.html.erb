@@ -1,0 +1,11 @@
+<div class="col ml-3">
+  <%= simple_form_for([@group, post, post.comments.build]) do |f| %>
+    <div class="row input-group mb-3 comment_box">
+      <%= f.text_area :comment, class: "form-control input_comment", placeholder: "Write your comment" %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <div class="input-group-append">
+        <%= f.button :submit, "Send", class: "btn btn-outline-secondary comment_button"  %>
+      </div>
+    </div>
+  <% end %>
+</div>

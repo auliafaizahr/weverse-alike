@@ -5,6 +5,11 @@
         <h5 class="card-title">Moments</h5>
         <div class="row">
           <div class="col-2">
+            <% if post.user.avatar.attached? %>
+              <%= image_tag post.user.avatar, class: 'profile_picture_moment' %>
+            <% else %>
+              <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+            <% end %>
           </div>
           <div class="col-7">
             <ul class="user">
@@ -20,14 +25,27 @@
           <div class="col-3">
             <ul class="menu">
               <li><i class="fas fa-language"></i></li>
-              <li><i class="fas fa-ellipsis-v"></i></li>
+              <li>
+              <div class="dropdown">
+                <button type="button" class="nav-link navbar_button_dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v" data-toggle="dropdown" id="dropdon"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                </div>
+              </div>
+              </li>
             </ul>
           </div>
         </div>
         <div class="row posted">
           <div class="col"></div>
         </div>
-        <div class="row cheers">
+        <div class="row cheers py-3">
           <div class="col">
             <ul class="cheers py-2">
               <li class="mr-4 cheers_button">
@@ -52,19 +70,18 @@
               <% end %>
             <% end %>
             <div class="row comment_posted">
-              <div class="col-2">
+              <div class="col-1">
                 <% if @user.avatar.attached? %>
                   <%= image_tag @user.avatar, class: 'profile_picture' %>
                 <% else %>
                   <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
                 <% end %>
               </div>
-              
-              </div>
+              <%= render 'comments/new', post: post  %>
             </div>
-            <%# <%= render 'shared/new_comment',  s post: post  %>          
         </div>
       </div>
     </div>
+  </div>
   <% end %>
 <% end %>

@@ -4,7 +4,8 @@ class PostsController < ApplicationController
 
   def index
     # binding.pry
-    @posts = @group.posts
+    @posts = @group.posts.order(created_at: :desc)
+
     # @post = @group.posts.build
     @user = current_user
     respond_to do |format|
