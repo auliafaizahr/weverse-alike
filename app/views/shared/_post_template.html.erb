@@ -1,3 +1,4 @@
+<%= render 'modal' %>
 <% posts.each do |post| %>
   <% unless post.user_id.nil? %>
     <div class="card mt-4 post-user">
@@ -27,15 +28,15 @@
               <li><i class="fas fa-language"></i></li>
               <li>
               <div class="dropdown">
-                <button type="button" class="nav-link navbar_button_dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn-menu-post" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-v" data-toggle="dropdown" id="dropdon"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                  <%= link_to  "Copy Post", group_posts_path(@group), class: "dropdown-item" %>
+                  <% if current_user.id == post.user.id %>
+                    <%= link_to  "Edit Post", edit_group_post_path(@group, post), remote: true, data: { target: "#modal_shared" }, class: "dropdown-item" %>
+                    <%= link_to  "Delete Post", group_post_path(@group, post), method: :delete, class: "dropdown-item" %>
+                  <% end %>
                 </div>
               </div>
               </li>

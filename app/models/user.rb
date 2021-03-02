@@ -6,14 +6,13 @@ class User < ApplicationRecord
 
   enum type_user: [:Artist, :User]
 
-  has_many :posts
-  has_many :comments
-  has_many :likes
-  has_many :join_groups
-  has_many :groups, through: :join_groups
-  has_many :post_likes
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :join_groups, dependent: :destroy
+  has_many :groups, through: :join_groups, dependent: :destroy
 
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :destroy
 
 
   def likes?(post)

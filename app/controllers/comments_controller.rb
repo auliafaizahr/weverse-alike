@@ -20,7 +20,6 @@ class CommentsController < ApplicationController
 
   private
   def set_post
-    binding.pry
     @post = Post.find(params[:post_id])
   end
 

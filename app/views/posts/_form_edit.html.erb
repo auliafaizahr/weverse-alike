@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Post</h5>
+      <% binding.pry %>
+      <%= simple_form_for([@group, @post]) do |f| %>
+        <div class="card_post_wrapper">
+          <div class="row">
+            <div class="col-2">
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar, class: 'profile_picture' %>
+              <% else %>
+                <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+              <% end %>
+            </div>
+            <div class="col-10">
+              <%= f.text_area :post,
+                              required: true,
+                              placeholder: 'Write your post here',
+                              class: 'input_post' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-right">
+              <i class="fas fa-image icon-wv"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12 text-right">
+            <%= f.button :submit, "Post", class: 'btn btn-primary btn-submit-post' %>
+          </div>
+        </div>
+        <% end %>
+  </div>
+</div>

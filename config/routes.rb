@@ -7,17 +7,8 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :front_pages
-  resources :posts do
-    resources :likes, only: %i[create destroy]
-    resources :post_likes, only: %i[create destroy]
-  end
-
-  
-  # resources :likes, only: [:create, :destroy]
 
   resources :groups do
-    resources :posts
-
     resources :posts do
       resources :likes, only: [:create, :destroy]
       resources :comments do
