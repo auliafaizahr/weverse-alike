@@ -21,6 +21,13 @@
                   <%= post.post %>
                 </p>
               </li>
+              <% if post.post_attachments.any? %>
+                <li>
+                  <% post.post_attachments.each do |attachment| %>
+                    <%= image_tag attachment.avatar.url, class: 'profile_picture_moment' %>
+                  <% end %>
+                </li>
+              <% end %>
             </ul>
           </div>
           <div class="col-3">

@@ -35,6 +35,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post = @group.posts.build(post_params)
+    @post_attachment = @post.post_attachments.build
   end
 
   def create
@@ -43,6 +44,9 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
+        params[:post_attachments]['avatar'].each do |a|
+          @post_attachment = @post.post_attachments.create!(:avatar => a, :post_id=> @post.id)
+        end
         format.html { redirect_to group_posts_path(@group), notice: 'Post was successfully created.' }
         format.json { render :index, status: :created, location: @post }
       else
@@ -61,7 +65,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:post)
+    params.require(:post).permit(:post).permit(:post, :user_id, :group_id, post_attachments_attributes: [:id, :post_id, :avatar])
   end
 
   def set_group
