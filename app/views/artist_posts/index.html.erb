@@ -1,0 +1,10 @@
+<%= render 'layouts/navbar' %>
+<div class="row mt-5">
+  <%= render 'layouts/left_sidebar', group: @group %>
+  <div class="col-lg-6 col-md-6">
+
+    <%= render 'shared/post_template', posts: @posts %>
+
+  </div>
+  <%= render 'layouts/right_sidebar' %>
+</div>

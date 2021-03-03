@@ -9,7 +9,12 @@
   <div class="col ml-3">
     <div class="row" style="width: 100%;">
       <div class="col py-3 comment_box">
-        <span style="font-weight: bold;"><%= comment.user.username %> </span>
+        <span style="font-weight: bold;">
+          <%= comment.user.username %>
+            <% if comment.user.artist?(comment.user) %>
+              <span><img class="verif_icon" src="https://img.icons8.com/color/48/000000/verified-badge.png"/></span>
+            <% end %>
+          </span>
         <%= comment.comment %>
       </div>
     </div>

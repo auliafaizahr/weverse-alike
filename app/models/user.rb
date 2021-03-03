@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,8 +12,13 @@ class User < ApplicationRecord
 
   has_one_attached :avatar, dependent: :destroy
 
-
   def likes?(post)
     post.likes.where(user_id: id).any?
   end
+
+  def artist?(user)
+    user.type_user == 'Artist'
+  end
+
+  scope :artist, -> { where("type_user = 0")}
 end

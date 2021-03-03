@@ -6,11 +6,9 @@ class GroupsController < ApplicationController
   end
 
   def show
-    set_group
-    # @posts = @group.posts
     @user = current_user
     respond_to do |format|
-      format.html 
+      format.html
     end
   end
 

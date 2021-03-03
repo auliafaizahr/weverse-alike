@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
 
     resources :users
+    resources :artist_posts
     resources :users do
       resources :feed_users
       resources :feed_artists

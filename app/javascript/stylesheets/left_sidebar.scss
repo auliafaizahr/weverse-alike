@@ -1,0 +1,14 @@
+a {
+  color: #212529;
+
+  &:hover {
+    text-decoration: none;
+    color: #212529;
+  }
+}
+
+.left_menu {
+  &.active {
+    color: #0BE4BF;
+  }
+}
