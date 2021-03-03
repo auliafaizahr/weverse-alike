@@ -22,9 +22,13 @@
                 </p>
               </li>
               <% if post.post_attachments.any? %>
-                <li>
+                <li class="d-flex flex-wrap w-100" style="display: flex;">
                   <% post.post_attachments.each do |attachment| %>
-                    <%= image_tag attachment.avatar.url, class: 'profile_picture_moment' %>
+                    <ul class="pl-1 my-1" style="list-style: none;">
+                      <li>
+                        <%= image_tag attachment.avatar.url, style: "height: 150px; border-radius: 5px;" %>
+                      </li>
+                    </ul>
                   <% end %>
                 </li>
               <% end %>

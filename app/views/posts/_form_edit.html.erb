@@ -20,7 +20,10 @@
           </div>
           <div class="row">
             <div class="col-12 text-right">
-              <i class="fas fa-image icon-wv"></i>
+              <span class="btn btn-large btn-file">
+                <i class="fas fa-image icon-wv"></i>
+                <%= f.file_field :avatar, multiple: true, name: "post_attachments[avatar][]" %>
+              </span>
             </div>
           </div>
         </div>

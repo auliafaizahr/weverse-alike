@@ -23,6 +23,9 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        params[:post_attachments]['avatar'].each do |a|
+          @post_attachment = @post.post_attachments.create!(:avatar => a, :post_id=> @post.id)
+        end
         format.html { redirect_to group_posts_path(@group), notice: 'Post was successfully updated.' }
         format.json { render :index, status: :ok, location: @post }
       else
