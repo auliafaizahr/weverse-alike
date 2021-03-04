@@ -20,5 +20,9 @@ class User < ApplicationRecord
     user.type_user == 'Artist'
   end
 
+  def join_group?(user, group)
+    JoinGroup.where(user_id: user, group_id: group)
+  end
+
   scope :artist, -> { where("type_user = 0")}
 end

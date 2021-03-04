@@ -10,14 +10,14 @@
   <div class="row mt-4">
     <div class="col">
       <ul>
-        <li class="mb-3">
+        <li class="mb-3 bold_font">
           <%= link_to  "Feed", group_posts_path(@group), class: "left_menu #{'active' if ['posts'].include?(controller_name)}" %>
         </li>
-        <li class="mb-3">
+        <li class="mb-3 bold_font">
           <%= link_to  "Artist", group_artist_posts_path(@group), class: "left_menu #{'active' if ['artist_posts'].include?(controller_name)}" %>
         </li>
-        <li class="mb-3">Media</li>
-        <li class="mb-3">Wevers Only</li>
+        <li class="mb-3 bold_font">Media</li>
+        <li class="mb-3 bold_font">Wevers Only</li>
       </ul>
     </div>
   </div>

@@ -2,6 +2,7 @@ class ArtistPostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group
   before_action :set_posts, only: [:index]
+  layout "layouts/home"
 
   def index
    @user = current_user

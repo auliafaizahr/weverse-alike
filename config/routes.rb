@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   }
 
   resources :groups
-  resources :front_pages
-
+  resources :front_pages 
+  
   resources :groups do
+    resources :join_groups
     resources :posts do
       resources :likes, only: [:create, :destroy]
       resources :comments do

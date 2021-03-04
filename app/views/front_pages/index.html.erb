@@ -1,16 +1,29 @@
+<%= render 'shared/modal' %>
+
 <%= render 'layouts/navbar' %>
 
 <div class="row mt-5">
   <div class="col row d-flex flex-row">
     <% @groups.each do |group| %>
       <div class="col-lg-3 col-md-6 col-sm-12 my-3">
-        <%= link_to group_posts_path(group) do %>
-          <div class="card">
-            <%= image_tag 'login.jpg', style: "width: 100%;" %>
-            <div class="card-body">
-              <%= group.name %>
+        <% if @user.join_group?(@user, group).any? %>
+          <%= link_to group_posts_path(group) do %>
+            <div class="card">
+              <%= image_tag 'login.jpg', style: "width: 100%;" %>
+              <div class="card-body">
+                <%= group.name %>
+              </div>
             </div>
-          </div>
+          <% end %>
+        <% else %>
+          <%= link_to new_group_join_group_path(group), remote: true, data: { target: "#modal_shared" } do %>
+            <div class="card">
+              <%= image_tag 'login.jpg', style: "width: 100%;" %>
+              <div class="card-body">
+                <%= group.name %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     <% end %>
