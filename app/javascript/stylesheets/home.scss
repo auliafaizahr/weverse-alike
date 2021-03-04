@@ -115,6 +115,10 @@ textarea {
   .comment_box {
     background-color: #F5F7FA;
     border-radius: 10px;
+
+    &.artist {
+      background-color: #ECFAFF;
+    }
   }
 
   img.profile_picture {

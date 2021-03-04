@@ -11,7 +11,7 @@
     <div class="col">
       <ul>
         <li class="mb-3">
-          <%= link_to  "Feed", group_posts_path(@group), class: "left_menu if ['posts'].include?(controller_name)}" %>
+          <%= link_to  "Feed", group_posts_path(@group), class: "left_menu #{'active' if ['posts'].include?(controller_name)}" %>
         </li>
         <li class="mb-3">
           <%= link_to  "Artist", group_artist_posts_path(@group), class: "left_menu #{'active' if ['artist_posts'].include?(controller_name)}" %>

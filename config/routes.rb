@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   end
   resource :profiles
   
-  root 'posts#index'
+  root 'front_pages#index'
 
 end

@@ -8,7 +8,7 @@
   </div>
   <div class="col ml-3">
     <div class="row" style="width: 100%;">
-      <div class="col py-3 comment_box">
+      <div class="col py-3 comment_box <%= 'artist' if comment.user.artist?(comment.user) %>">
         <span style="font-weight: bold;">
           <%= comment.user.username %>
             <% if comment.user.artist?(comment.user) %>
