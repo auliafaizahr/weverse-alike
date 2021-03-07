@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :front_pages 
   
   resources :groups do
-    resources :join_groups
+    get "/join_groups/unique", to: "join_groups#find_username"
+    resources :join_groups 
+    
     resources :posts do
       resources :likes, only: [:create, :destroy]
       resources :comments do

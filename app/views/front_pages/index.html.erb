@@ -16,7 +16,7 @@
             </div>
           <% end %>
         <% else %>
-          <%= link_to new_group_join_group_path(group), remote: true, data: { target: "#modal_shared" } do %>
+          <%= link_to new_group_join_group_path(group) do %>
             <div class="card">
               <%= image_tag 'login.jpg', style: "width: 100%;" %>
               <div class="card-body">

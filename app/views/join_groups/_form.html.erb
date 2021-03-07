@@ -1,2 +1,13 @@
-tes form 
-ini form join groups
+<div class="col ml-3">
+  <%= simple_form_for([@group, @group.join_groups.build]) do |f| %>
+    <div class="row input-group mb-3 comment_box">
+      <%= f.input :username, label: "Username" %>
+      <div class="input-group">
+        <%= f.button :submit, "Send", class: "btn btn-outline-secondary comment_button"  %>
+      </div>
+      <div class="input-group">
+          tes buat error
+      </div>
+    </div>
+  <% end %>
+</div>

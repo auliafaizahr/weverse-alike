@@ -22,6 +22,7 @@ window.$ = $;
 
 import './home'
 import './alert'
+import './join_group'
 
 
 

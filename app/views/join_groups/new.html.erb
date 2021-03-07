@@ -1,1 +1,46 @@
-<%= render "shared/modal" %>
+<%= render "layouts/navbar" %>
+
+<div class="row vh-100" style="background-color: white;">
+  <div class="col align-self-center">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="row justify-content-center">
+          <p>You havent join this Group on Weverse, Join <%= @group.name %> Weverse to See Their Activity!</p>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-5 card mt-4 post-user">
+            <div class="card-body">
+              <div class="col ml-3">
+                <%= simple_form_for([@group, @group.join_groups.build]) do |f| %>
+                  <div class="form-inputs">
+                    <div class="row input-group mb-3 comment_box">
+                      <div class="form-group w-100">
+                        <label for="">Nickname : </label>
+                        <%= f.input :username, label: false, input_html: { class: "w-100 px-3 py-3 input_nickname", id: "input_username" }, remote: true %>
+                      </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                      <div class="form-group my-2">
+                        <span style="color: red;" id="error_message"></span>
+                        <% if @error %>
+                          <span style="color: red;" id="error_message"><%= @error.message %></span>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                      <div class="form-group">
+                        <%= f.button :submit, "Join", class: "btn btn btn-primary btn-submit-post"  %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
