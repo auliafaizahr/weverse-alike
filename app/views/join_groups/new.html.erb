@@ -11,7 +11,7 @@
           <div class="col-5 card mt-4 post-user">
             <div class="card-body">
               <div class="col ml-3">
-                <%= simple_form_for([@group, @group.join_groups.build]) do |f| %>
+                <%= simple_form_for([@group, @group.join_groups.build], remote: true) do |f| %>
                   <div class="form-inputs">
                     <div class="row input-group mb-3 comment_box">
                       <div class="form-group w-100">
@@ -21,10 +21,7 @@
                     </div>
                     <div class="row  justify-content-center">
                       <div class="form-group my-2">
-                        <span style="color: red;" id="error_message"></span>
-                        <% if @error %>
-                          <span style="color: red;" id="error_message"><%= @error.message %></span>
-                        <% end %>
+                          <span id="error_message"></span>
                       </div>
                     </div>
                     <div class="row  justify-content-center">

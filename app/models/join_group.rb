@@ -3,8 +3,7 @@ class JoinGroup < ApplicationRecord
   belongs_to :group
 
   def unique?(username, group)
-    binding.pry
-    nickname = username.scan(/\w+/)
+    nickname = username.scan(/\w+/).to_sentence
     all_username = []
     JoinGroup.where(group_id: group.id).each do |join|
       all_username << join.username

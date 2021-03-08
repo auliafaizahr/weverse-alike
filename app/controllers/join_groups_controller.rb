@@ -5,7 +5,6 @@ class JoinGroupsController < ApplicationController
 
   def new
     @title = "You havent join this"
-    @join_group = @group.join_groups.build
     @user = current_user
     respond_to do |format|
       format.html
@@ -19,11 +18,10 @@ class JoinGroupsController < ApplicationController
       @join_group.user_id = current_user.id
     end
     respond_to do |format|
-      if @join_group.save
-        format.html { redirect_to group_posts_path(@group), notice: 'Post was successfully created.' }
-        format.json { render :index, status: :created, location: @join_group }
+      if @join_group && @join_group.save
+        format.html { redirect_to group_posts_path(@group), notice: 'Welcome!' }
       else
-        format.html { redirect_to group_posts_path(@group), alert: 'Failed to create post.' }
+        format.js { flash[:warning] = "The username already exist" }
       end
     end
   end
@@ -31,9 +29,7 @@ class JoinGroupsController < ApplicationController
   def find_username
     set_group
     set_user
-    unless @group.join_groups.build(join_group_params).unique?(params[:join_group][:username], @group).unique?(@user, @group)
-      respond_to :js
-    end
+    @group.join_groups.build(join_group_params).unique?(params[:join_group][:username], @group)
   end
 
   private
@@ -50,9 +46,4 @@ class JoinGroupsController < ApplicationController
     params.require(:join_group).permit(:username)
   end
 
-  def unique
-    set_group
-    set_user
-    @group.join_groups.build(join_group_params).unique?(params[:join_group][:username], @group).unique?(@user, @group)
-  end  
 end
