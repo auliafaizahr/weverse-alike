@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WeverseAlike</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if flash[:notice] %>
+      <div class="container-lg">
+        <p class="alert alert-success" role="alert"> <%= notice %> </p>
+      </div>
+      <% flash.clear %>
+    <% elsif flash[:alert] %>
+      <div class="container-lg">
+        <p class="alert alert-danger" role="alert"> <%= alert %> </p>
+      </div>
+      <% flash.clear %>
+    <% end %>
+    <% if user_signed_in? %>
+      <section class="section">
+        <div class="col">
+          <%= render 'layouts/navbar' %>
+            <div class="row mt-5 col">
+              <div class="col-9">
+                <%= yield %>
+              </div>
+
+              <div class="col-3">
+                <%= render "medias/comments_media" %>
+              </div>
+            </div>
+        </div>
+      </section>
+    <% else %>
+      <%= yield %>
+      <%# <%= render 'users/sessions/new' %> %>
+    <% end %>
+  </body>
+</html>

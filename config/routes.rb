@@ -6,12 +6,12 @@ Rails.application.routes.draw do
   }
 
   resources :groups
-  resources :front_pages 
-  
+  resources :front_pages
+
   resources :groups do
-    get "/join_groups/unique", to: "join_groups#find_username"
-    resources :join_groups 
-    
+    # get "/join_groups/unique", to: "join_groups#find_username"
+    resources :join_groups
+
     resources :posts do
       resources :likes, only: [:create, :destroy]
       resources :comments do
@@ -21,14 +21,17 @@ Rails.application.routes.draw do
 
     resources :users
     resources :artist_posts
+    resources :medias do
+      resources :media_likes, only: [:create, :destroy]
+      resource :watch_medias, only: [:show]
+    end
     resources :users do
       resources :feed_users
       resources :feed_artists
-      resources :medias
     end
   end
   resource :profiles
-  
+
   root 'front_pages#index'
 
 end

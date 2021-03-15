@@ -16,7 +16,9 @@
         <li class="mb-3 bold_font">
           <%= link_to  "Artist", group_artist_posts_path(@group), class: "left_menu #{'active' if ['artist_posts'].include?(controller_name)}" %>
         </li>
-        <li class="mb-3 bold_font">Media</li>
+        <li class="mb-3 bold_font">
+          <%= link_to  "Media", group_medias_path(@group), class: "left_menu #{'active' if ['medias'].include?(controller_name)}" %>
+        </li>
         <li class="mb-3 bold_font">Wevers Only</li>
       </ul>
     </div>

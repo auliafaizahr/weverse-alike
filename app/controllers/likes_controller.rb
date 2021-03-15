@@ -10,9 +10,16 @@ class LikesController < ApplicationController
           format. js { render "likes/create.js" }
         end
       end
-    else
+    elsif @comment
       respond_to do |format|
         if @comment.likes.where(user_id: current_user.id).first_or_create
+          format.html { redirect_to group_posts_path(@group) }
+          format.js { render "comment_likes/create.js" }
+        end
+      end
+    elsif @media
+      respond_to do |format|
+        if @media.likes.where(user_id: current_user.id).first_or_create
           format.html { redirect_to group_posts_path(@group) }
           format.js { render "comment_likes/create.js" }
         end
@@ -41,6 +48,8 @@ class LikesController < ApplicationController
     set_group
     if params[:comment_id]
       @comment = Comment.find(params[:comment_id])
+    elsif params[:media_id]
+      @media = MediaVideo.find(params[:media_id])
     else
       @post = @group.posts.find(params[:post_id])
     end

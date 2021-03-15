@@ -12,17 +12,23 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+var jQuery = require('jquery')
+require("jquery-ui-dist/jquery-ui")
+require("jquery-ui")
+
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
 //bootstrap
 require("bootstrap")
 require("@fortawesome/fontawesome-free/scss/fontawesome.scss")
 require("@fortawesome/fontawesome-free/js/all.js")
+require("owl.carousel/dist/owl.carousel.min")
 
-window.jQuery = $;
-window.$ = $;
 
 import './home'
 import './alert'
 import './join_group'
-
+import './media'
 
 

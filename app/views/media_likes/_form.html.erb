@@ -1,0 +1,7 @@
+<div id="media_like-form_<%= media.id %>">
+  <% if user_signed_in? && current_user.likes?(media) %>
+    <%= render 'media_likes/unlike', media: media %>
+  <% else %>
+    <%= render 'media_likes/like', media: media %>
+  <% end %>
+</div>
