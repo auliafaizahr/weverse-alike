@@ -1,1 +1,19 @@
-disini komen
+<div class="row">
+  <div class="col">
+    <% if @comments %>
+      <% @comments.each do |comment| %>
+        <%= render 'shared/comments', comment: comment %>
+      <% end %>
+    <% end %>
+    <div class="row comment_posted">
+      <div class="col-1">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: 'profile_picture' %>
+        <% else %>
+          <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+        <% end %>
+      </div>
+      <%= render 'form_comment'  %>
+    </div>
+  </div>
+</div>

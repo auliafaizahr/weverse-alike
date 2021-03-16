@@ -1,13 +1,18 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:create]
+  before_action :set_commentable, only: [:create]
+  before_action :set_group, only: [:create]
+
+  def index
+    
+  end
 
   def new
     @comment = Comment.new
   end
 
   def create
-    @comment = @post.comments.build(comment_params)
+    @comment = @commentable.comments.build(comment_params)
     respond_to do |format|
       if @comment.save
         format.html { redirect_to group_posts_path(@group), notice: 'Comment was successfully created.' }
@@ -19,8 +24,13 @@ class CommentsController < ApplicationController
   end
 
   private
-  def set_post
-    @post = Post.find(params[:post_id])
+  def set_commentable
+    binding.pry
+    if params[:post_id]
+      @commentable = Post.find(params[:post_id])
+    elsif params[:media_id]
+      @commentable = MediaVideo.find(params[:media_id])
+    end
   end
 
   def comment_params

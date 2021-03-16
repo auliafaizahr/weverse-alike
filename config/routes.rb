@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :front_pages
 
   resources :groups do
-    # get "/join_groups/unique", to: "join_groups#find_username"
     resources :join_groups
 
     resources :posts do
@@ -23,8 +22,9 @@ Rails.application.routes.draw do
     resources :artist_posts
     resources :medias do
       resources :media_likes, only: [:create, :destroy]
-      resource :watch_medias, only: [:show]
+      resources :comments
     end
+
     resources :users do
       resources :feed_users
       resources :feed_artists

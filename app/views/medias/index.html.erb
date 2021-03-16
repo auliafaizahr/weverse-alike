@@ -8,7 +8,7 @@
       <div class="col row">
         <div class="owl-carousel media_carousel">
           <% media_category.media_videos.each do |video| %>
-            <%= link_to  group_media_watch_medias_path(video.group_id, video) do %>
+            <%= link_to  group_media_path(video.group_id, video) do %>
               <div class="item d-flex flex-column" >
                 <%= image_tag video.thumbnail_url, class: "img-thumbnail" %>
                 <span class="text-center" ><%= video.title %></span>
