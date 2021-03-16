@@ -1,12 +1,13 @@
-<div id="like-form_<%= post.id %>">
-  <% if user_signed_in? && current_user.likes?(post) %>
-    <%= render 'shared/likes/unlike', post: post %>
+<% binding.pry %>
+<div id="like-form_<%= likeable.id %>">
+  <% if user_signed_in? && current_user.likes?(likeable) %>
+    <%= render 'shared/likes/unlike', likeable: likeable %>
   <% else %>
-    <%= render 'shared/likes/like', post: post %>
+    <%= render 'shared/likes/like', likeable: likeable %>
   <% end %>
 
-  <% if post.likes.any? %>
-    <%= post.likes.size %> <span>Cheers</span>
+  <% if likeable.likes.any? %>
+    <%= likeable.likes.size %> <span>Cheers</span>
   <% else %>
     <span>Cheers First</span>
   <% end %>

@@ -1,1 +1,1 @@
-$("#like-form_<%= @post.id %>").html("<%= escape_javascript(render partial: 'shared/likes/unlike', locals: { post: @post } ) %>");
+$("#like-form_<%= @likeable.id %>").html("<%= escape_javascript(render partial: 'shared/likes/unlike', locals: { likeable: @likeable } ) %>");

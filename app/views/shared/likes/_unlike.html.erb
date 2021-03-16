@@ -1,4 +1,3 @@
-
-<%= link_to group_post_like_path(@group, post, post.likes), method: :delete, remote: true  do %>
+<%= link_to group_post_like_path(@group, likeable, likeable.likes), method: :delete, remote: true  do %>
   <i class="fas fa-heart heart-filled"></i>
 <% end %>

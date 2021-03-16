@@ -25,12 +25,11 @@
       <section class="section">
         <div class="col">
           <%= render 'layouts/navbar' %>
-            <div class="row mt-5 col">
-              <div class="col-9">
+            <div class="row pt-5 col" style="background-color: 'white';">
+              <div class="col-9" style="border-right: 1px solid #BDC0C5;">
                 <%= yield %>
               </div>
-
-              <div class="col-3">
+              <div class="col-3 position-absolute" style="right: 0;">
                 <%= render "medias/comments_media" %>
               </div>
             </div>

@@ -3,25 +3,11 @@ class LikesController < ApplicationController
   before_action :set_likeable, only: [:create, :destroy]
 
   def create
-    if @post
+    if @likeable
       respond_to do |format|
-        if @post.likes.where(user_id: current_user.id).first_or_create
+        if @likeable.likes.where(user_id: current_user.id).first_or_create
           format.html { redirect_to group_posts_path(@group) }
           format. js { render "likes/create.js" }
-        end
-      end
-    elsif @comment
-      respond_to do |format|
-        if @comment.likes.where(user_id: current_user.id).first_or_create
-          format.html { redirect_to group_posts_path(@group) }
-          format.js { render "comment_likes/create.js" }
-        end
-      end
-    elsif @media
-      respond_to do |format|
-        if @media.likes.where(user_id: current_user.id).first_or_create
-          format.html { redirect_to group_posts_path(@group) }
-          format.js { render "comment_likes/create.js" }
         end
       end
     end
@@ -47,11 +33,11 @@ class LikesController < ApplicationController
   def set_likeable
     set_group
     if params[:comment_id]
-      @comment = Comment.find(params[:comment_id])
+      @likeable = Comment.find(params[:comment_id])
     elsif params[:media_id]
-      @media = MediaVideo.find(params[:media_id])
+      @likeable = MediaVideo.find(params[:media_id])
     else
-      @post = @group.posts.find(params[:post_id])
+      @likeable = @group.posts.find(params[:post_id])
     end
   end
 
