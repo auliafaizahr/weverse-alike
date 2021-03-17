@@ -1,3 +1,9 @@
-<%= link_to group_post_comment_like_path(@group, comment.id, comment, comment.likes), method: :delete, remote: true  do %>
-  <i class="far fa-thumbs-up heart-filled"></i>
+<% if comment.commentable_type == "Post" %>
+  <%= link_to group_post_comment_comment_like_path(@group, comment.id, comment, comment.likes), method: :delete, remote: true  do %>
+    <i class="far fa-thumbs-up heart-filled"></i>
+  <% end %>
+<% elsif comment.commentable_type == "MediaVideo" %>
+  <%= link_to group_media_comment_comment_like_path(@group, comment.id, comment, comment.likes), method: :delete, remote: true  do %>
+    <i class="far fa-thumbs-up heart-filled"></i>
+  <% end %>
 <% end %>

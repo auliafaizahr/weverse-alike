@@ -6,8 +6,8 @@ class MediaLikesController < ApplicationController
     if @media
       respond_to do |format|
         if @media.likes.where(user_id: current_user.id).first_or_create
-          format.html { redirect_to group_posts_path(@group) }
-          format.js { render "comment_likes/create.js" }
+          format.html { redirect_to group_media_path(@group, @media) }
+          format.js { render "media_likes/create.js" }
         end
       end
     end
@@ -15,10 +15,10 @@ class MediaLikesController < ApplicationController
 
   def destroy
     if @media
-      @media.likes.find_by(likeable_id: params[:post_id]).destroy
+      @media.likes.find_by(likeable_id: params[:media_id]).destroy
       respond_to do |format|
-        format.html { redirect_to group_posts_path(@group) }
-        format.js { render "likes/destroy.js" }
+        format.html { redirect_to group_media_path(@group, @media) }
+        format.js { render "media_likes/destroy.js" }
       end
     end
   end

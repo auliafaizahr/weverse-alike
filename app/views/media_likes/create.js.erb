@@ -1,0 +1,1 @@
+$("#media_like-form_<%= @media.id %>").html("<%= escape_javascript(render partial: 'media_likes/unlike', locals: { media: @media } ) %>");

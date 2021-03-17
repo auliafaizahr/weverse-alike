@@ -21,7 +21,7 @@
     <div class="row col pt-2">
       <ul class="comment">
         <li class="mr-3">
-          <%= render 'likes/form', likeable: comment %>
+          <%= render 'comment_likes/form', comment: comment %>
         </li>
         <li class="mr-3">translate</li>
         <li class="mr-3"><%= comment.created_at.localtime.to_formatted_s(:long) %></li>

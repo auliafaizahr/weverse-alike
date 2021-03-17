@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :posts do
       resources :likes, only: [:create, :destroy]
       resources :comments do
-        resources :likes, only: [:create, :destroy]
+        resources :comment_likes, only: [:create, :destroy]
       end
     end
 
@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     resources :artist_posts
     resources :medias do
       resources :media_likes, only: [:create, :destroy]
-      resources :comments
+      resources :comments do
+        resources :comment_likes, only: [:create, :destroy]
+      end
     end
 
     resources :users do

@@ -25,7 +25,6 @@ class CommentsController < ApplicationController
 
   private
   def set_commentable
-    binding.pry
     if params[:post_id]
       @commentable = Post.find(params[:post_id])
     elsif params[:media_id]

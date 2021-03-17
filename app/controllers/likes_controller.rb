@@ -20,6 +20,12 @@ class LikesController < ApplicationController
         format.html { redirect_to group_posts_path(@group) }
         format.js { render "likes/destroy.js" }
       end
+    elsif @media
+      @media.likes.find_by(likeable_id: params[:media_id]).destroy
+      respond_to do |format|
+        format.html { redirect_to group_media_path(@group, @media) }
+        format.js { render "comment_likes/destroy.js" }
+      end
     else
       @comment.likes.find_by(likeable_id: params[:comment_id]).destroy
       respond_to do |format|
@@ -33,11 +39,11 @@ class LikesController < ApplicationController
   def set_likeable
     set_group
     if params[:comment_id]
-      @likeable = Comment.find(params[:comment_id])
-    elsif params[:media_id]
-      @likeable = MediaVideo.find(params[:media_id])
+      @comment = Comment.find(params[:comment_id])
+    elsif params[:media_id] && params[:comment_id]
+      @media = MediaVideo.find(params[:media_id])
     else
-      @likeable = @group.posts.find(params[:post_id])
+      @post = @group.posts.find(params[:post_id])
     end
   end
 

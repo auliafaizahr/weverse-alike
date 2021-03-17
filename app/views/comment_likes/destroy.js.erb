@@ -1,1 +1,5 @@
-$("#comment_like-form_<%= @comment.id %>").html("<%= escape_javascript(render partial: 'comment_likes/like', locals: { comment: @comment } ) %>");
+<% if @post %>
+  $("#comment_like-form_<%= @likeable.id %>").html("<%= escape_javascript(render partial: 'comment_likes/like', locals: { comment: @likeable } ) %>");
+<% elsif @media %>
+  $("#comment_like-form_<%= @likeable.id %>").html("<%= escape_javascript(render partial: 'comment_likes/like', locals: { comment: @likeable } ) %>");
+<% end %>

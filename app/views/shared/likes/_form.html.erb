@@ -1,4 +1,3 @@
-<% binding.pry %>
 <div id="like-form_<%= likeable.id %>">
   <% if user_signed_in? && current_user.likes?(likeable) %>
     <%= render 'shared/likes/unlike', likeable: likeable %>

@@ -1,5 +1,4 @@
 <div class="col ml-3">
-  <% binding.pry %>
   <%= simple_form_for([@group, media, media.comments.build]) do |f| %>
     <div class="row input-group mb-3 comment_box">
       <%= f.text_area :comment, class: "form-control input_comment", placeholder: "Write your comment" %>
