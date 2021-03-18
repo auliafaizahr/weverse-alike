@@ -3,16 +3,14 @@ class PostsController < ApplicationController
   before_action :set_group, only: [:index, :create, :new, :destroy, :edit, :update]
   before_action :set_post, only: [:destroy, :edit, :update]
   before_action :check_join_group, only: [:index, :create, :new, :destroy, :edit, :update]
-  # before_action :set_group, only: [:check_join_group]
-  # before_action :set_post, only: [:check_join_group]
   layout "layouts/home"
 
   def index
-    @title = "Edit Post"
     @posts = @group.posts.order(created_at: :desc)
     @user = current_user
     respond_to do |format|
       if check_join_group.any?
+        @username = @user.join_groups.find_by(group_id: @group.id).username
         format.html
       else
         format.html { redirect_to new_group_join_group_path(@group), notice: 'You need to join first.' }

@@ -1,0 +1,5 @@
+$(document).ready(function() {
+  $('.modal_all').modal('toggle');
+  $(".modal-body").html("<%= escape_javascript(render partial: 'form_edit' ) %>");
+  $(".modal-title").html("Change Username");
+});

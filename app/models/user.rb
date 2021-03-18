@@ -24,5 +24,9 @@ class User < ApplicationRecord
     JoinGroup.where(user_id: user, group_id: group)
   end
 
+  def nickname(user, group)
+    JoinGroup.find_by(user_id: user, group_id: group).username
+  end
+
   scope :artist, -> { where("type_user = 0")}
 end

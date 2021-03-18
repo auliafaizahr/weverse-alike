@@ -1,0 +1,15 @@
+$(document).ready(function() {
+  <% if flash[:warning] %>
+    $("#error_message").html('<p class="alert alert-danger"> <%= flash[:warning]%> </p>');
+  <% else %>
+    $('#error_message').html("");
+  <% end %>
+});
+
+$(document).ready(function() {
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 1000);
+  });
+});
