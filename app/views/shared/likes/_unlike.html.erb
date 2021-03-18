@@ -1,3 +1,9 @@
-<%= link_to group_post_like_path(@group, likeable, likeable.likes), method: :delete, remote: true  do %>
-  <i class="fas fa-heart heart-filled"></i>
+<% if likeable.class == Post %>
+  <%= link_to group_post_like_path(@group, likeable, likeable.likes), method: :delete, remote: true  do %>
+    <i class="fas fa-heart heart-filled"></i>
+  <% end %>
+<% elsif likeable.class == MediaVideo %>
+  <%= link_to group_media_like_path(@group, likeable, likeable.likes), method: :delete, remote: true  do %>
+    <i class="far fa-thumbs-up heart-filled"></i>
+  <% end %>
 <% end %>

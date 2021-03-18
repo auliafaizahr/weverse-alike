@@ -42,9 +42,8 @@ class JoinGroupsController < ApplicationController
   def update
     respond_to do |format|
       unless find_username
-        @join_group = @group.join_groups.update(join_group_params)
+        @join_group.update(join_group_params)
         format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
-        format.js { flash[:warning] = "Username updated!" }
       else
         format.js { flash[:warning] = "The username already exist." }
       end

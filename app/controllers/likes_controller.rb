@@ -3,10 +3,13 @@ class LikesController < ApplicationController
   before_action :set_likeable, only: [:create, :destroy]
 
   def create
-    if @likeable
-      respond_to do |format|
-        if @likeable.likes.where(user_id: current_user.id).first_or_create
+    respond_to do |format|
+      if @likeable.likes.where(user_id: current_user.id).first_or_create
+        if params[:post_id]
           format.html { redirect_to group_posts_path(@group) }
+          format. js { render "likes/create.js" }
+        elsif params[:media_id]
+          format.html { redirect_to group_media_path(@group, @likeable) }
           format. js { render "likes/create.js" }
         end
       end
@@ -14,23 +17,15 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    if @post
-      @post.likes.find_by(likeable_id: params[:post_id]).destroy
-      respond_to do |format|
+    respond_to do |format|
+      if params[:post_id]
+        @likeable.likes.find_by(likeable_id: params[:post_id]).destroy
         format.html { redirect_to group_posts_path(@group) }
-        format.js { render "likes/destroy.js" }
-      end
-    elsif @media
-      @media.likes.find_by(likeable_id: params[:media_id]).destroy
-      respond_to do |format|
-        format.html { redirect_to group_media_path(@group, @media) }
-        format.js { render "comment_likes/destroy.js" }
-      end
-    else
-      @comment.likes.find_by(likeable_id: params[:comment_id]).destroy
-      respond_to do |format|
-        format.html { redirect_to group_posts_path(@group) }
-        format.js { render "comment_likes/destroy.js" }
+        format. js { render "likes/destroy.js" }
+      elsif params[:media_id]
+        @likeable.likes.find_by(likeable_id: params[:media_id]).destroy
+        format.html { redirect_to group_media_path(@group, @likeable) }
+        format. js { render "likes/destroy.js" }
       end
     end
   end
@@ -38,12 +33,10 @@ class LikesController < ApplicationController
   private
   def set_likeable
     set_group
-    if params[:comment_id]
-      @comment = Comment.find(params[:comment_id])
-    elsif params[:media_id] && params[:comment_id]
-      @media = MediaVideo.find(params[:media_id])
-    else
-      @post = @group.posts.find(params[:post_id])
+    if params[:post_id]
+      @likeable = @group.posts.find(params[:post_id])
+    elsif params[:media_id]
+      @likeable = @group.media_videos.find(params[:media_id])
     end
   end
 

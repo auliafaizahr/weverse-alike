@@ -1,1 +1,5 @@
-$("#like-form_<%= @post.id %>").html("<%= escape_javascript(render partial: 'shared/likes/like', locals: { post: @post } ) %>");
+<% if params[:post_id] %>
+  $("#like-form_<%= @likeable.id %>").html("<%= escape_javascript(render partial: 'shared/likes/like', locals: { likeable: @likeable } ) %>");
+<% elsif params[:media_id] %>
+  $("#like-form_<%= @likeable.id %>").html("<%= escape_javascript(render partial: 'shared/likes/like', locals: { likeable: @likeable } ) %>");
+<% end %>
