@@ -14,10 +14,6 @@ class JoinGroupsController < ApplicationController
   end
 
   def create
-    unless find_username
-      @join_group = @group.join_groups.build(join_group_params)
-      @join_group.user_id = current_user.id
-    end
     respond_to do |format|
       if @join_group && @join_group.save
         format.html { redirect_to group_posts_path(@group), notice: 'Welcome!' }
@@ -25,12 +21,6 @@ class JoinGroupsController < ApplicationController
         format.js { flash[:warning] = "The username already exist" }
       end
     end
-  end
-
-  def find_username
-    set_group
-    set_user
-    @group.join_groups.build(join_group_params).unique?(params[:join_group][:username], @group)
   end
 
   def edit
@@ -41,8 +31,7 @@ class JoinGroupsController < ApplicationController
 
   def update
     respond_to do |format|
-      unless find_username
-        @join_group.update(join_group_params)
+      if @join_group.update(join_group_params)
         format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
       else
         format.js { flash[:warning] = "The username already exist." }
@@ -65,7 +54,7 @@ class JoinGroupsController < ApplicationController
   end
 
   def join_group_params
-    params.require(:join_group).permit(:username)
+    params.require(:join_group).permit(:username, :avatar)
   end
 
 end

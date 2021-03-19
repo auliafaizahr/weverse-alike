@@ -4,6 +4,16 @@
       <div class="col ml-3">
         <%= simple_form_for([@group, @join_group], remote: true) do |f| %>
           <div class="form-inputs">
+          <div class="row">
+            <div class="col-2">
+              <% if @join_group.avatar.attached? %>
+                <%= image_tag @join_group.avatar, style: "width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" %>
+              <% end %>
+            </div>
+            <div class="col-10 px-5 align-self-center">
+              <%= f.file_field :avatar %>
+            </div>
+          </div>
             <div class="row input-group mb-3 comment_box">
               <div class="form-group w-100">
                 <label for="">Nickname : </label>
