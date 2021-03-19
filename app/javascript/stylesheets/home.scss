@@ -206,3 +206,11 @@ textarea {
   background-color: #0BE4BF;
   border: none;
 }
+
+.img_thumbnail_group {
+  width: 100%;
+  object-fit: cover;
+  height: 10em;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}

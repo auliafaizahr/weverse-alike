@@ -2,14 +2,14 @@
 
 <%= render 'layouts/navbar' %>
 
-<div class="row mt-5">
+<div class="row row_content">
   <div class="col row d-flex flex-row">
     <% @groups.each do |group| %>
       <div class="col-lg-3 col-md-6 col-sm-12 my-3">
         <% if @user.join_group?(@user, group).any? %>
           <%= link_to group_posts_path(group) do %>
-            <div class="card">
-              <%= image_tag 'login.jpg', style: "width: 100%;" %>
+            <div class="card" style="border-radius: 15px;">
+              <%= image_tag 'login.jpg', class: "img_thumbnail_group" %>
               <div class="card-body">
                 <%= group.name %>
               </div>
@@ -17,8 +17,8 @@
           <% end %>
         <% else %>
           <%= link_to new_group_join_group_path(group) do %>
-            <div class="card">
-              <%= image_tag 'login.jpg', style: "width: 100%;" %>
+            <div class="card" style="border-radius: 15px;">
+              <%= image_tag 'login.jpg', class: "img_thumbnail_group" %>
               <div class="card-body">
                 <%= group.name %>
               </div>

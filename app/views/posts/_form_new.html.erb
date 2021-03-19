@@ -8,7 +8,7 @@
               <% if user_avatar_exist(@group, @user) %>
                 <%= image_tag user_avatar(@group, @user).avatar, class: 'profile_picture' %>
               <% else %>
-                <%= image_tag 'taehyun.jpg', class: 'profile_picture' %>
+                <%= image_tag 'default.jpg', class: 'profile_picture' %>
               <% end %>
             </div>
             <div class="col-10">

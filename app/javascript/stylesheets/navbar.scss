@@ -1,9 +1,20 @@
 .navbar_custom {
   background-color: white;
   border-bottom: solid .5px #EBEBEB;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  /* left: 16px; */
+  z-index: 2;
+  margin: 0 auto;
+  right: 0;
 
   .navbar_button_dropdown {
     background: none;
     border: none;
   }
+}
+
+.row_content {
+  margin-top: 6em;
 }
