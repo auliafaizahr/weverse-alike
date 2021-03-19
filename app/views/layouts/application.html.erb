@@ -24,6 +24,7 @@
     <% if user_signed_in? %>
       <section class="section">
         <div class="container-lg">
+          <%= render 'layouts/toggle_sidebar' %>
          <%= yield %>
         </div>
       </section>

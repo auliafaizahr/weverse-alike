@@ -1,0 +1,22 @@
+<%= render 'shared/modal' %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="row row_content">
+  <div class="col row d-flex flex-row">
+    <table>
+      <tr>
+        <th>Group</th>
+        <th>Action</th>
+      </tr>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.name %></td>
+          <td>
+            <%= link_to  "Edit", edit_group_path(group), remote: true, data: {toggle: "modal", target: "#modal_shared"} %>
+          </td>
+        </tr>
+    <% end %>
+    </table>
+  </div>
+</div>

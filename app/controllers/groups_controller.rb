@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:show]
+  before_action :set_group, only: [:show, :edit]
 
   def index
   end
@@ -10,6 +10,16 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+
+  def edit
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
+
+  def update
+    
   end
 
   # def create
@@ -26,6 +36,7 @@ class GroupsController < ApplicationController
 
   private
   def set_group
+    binding.pry
     @group = Group.find(params[:id])
   end
 

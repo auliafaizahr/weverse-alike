@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :front_pages
+  resources :admins
 
   resources :groups do
     resources :join_groups

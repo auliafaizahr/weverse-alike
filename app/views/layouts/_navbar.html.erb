@@ -32,6 +32,7 @@
             <% if @group %>
               <%= link_to  "Change Username",  edit_group_join_group_path(@group, @group.join_groups), remote: true, data: {toggle: "modal", target: "#modal_shared"},class: "dropdown-item" %>
             <% end %>
+            <%= link_to  "Admin Page",  admins_path, class: "dropdown-item" %>
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <div class="dropdown-divider"></div>

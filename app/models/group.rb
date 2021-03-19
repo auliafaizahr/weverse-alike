@@ -5,5 +5,5 @@ class Group < ApplicationRecord
   has_many :media_videos
   has_many :media_video_categories
 
-  has_one_attached :photo
+  has_one_attached :avatar
 end
