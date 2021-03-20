@@ -32,4 +32,10 @@
     padding: 0;
     font-size: 1em;
   }
+
+  .card_toggle {
+    &:hover{
+      cursor: pointer;
+    }
+  }
 }

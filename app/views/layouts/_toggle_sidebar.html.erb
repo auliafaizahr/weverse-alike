@@ -3,11 +3,14 @@
     <div id="accordion">
       <ul>
         <li>
-          <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne">
-              <h6 class="mb-0">
-                  Joined Group
-              </h6>
+          <div class="card border-0 bg-white card_toggle">
+            <div class="card-header  bg-white border-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne">
+              <span class="d-flex justify-content-between">
+                <h6 class="mb-0">
+                    Joined Group
+                </h6>
+                <i class="fas fa-angle-down align-self-center"></i>
+              </span>
 
             </div>
 
@@ -21,6 +24,40 @@
               </div>
             </div>
           </div>
+        </li>
+        <li>
+          <div class="card border-0 bg-white card_toggle">
+            <div class="card-header  bg-white border-0" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" id="headingTwo">
+              <span class="d-flex justify-content-between">
+                <h6 class="mb-0">
+                    Other Group
+                </h6>
+                <i class="fas fa-angle-down align-self-center"></i>
+              </span>
+
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="">
+                <ul>
+                  <li>4</li>
+                  <li>5</li>
+                  <li>6</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="card border-0 bg-white card_toggle">
+            <div class="card-header  bg-white border-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne" id="">
+              <span class="d-flex justify-content-between">
+                <h6 class="mb-0">
+                    Weverse Magazine
+                </h6>
+              </span>
+
+            </div>
         </li>
       </ul>
     </div>
