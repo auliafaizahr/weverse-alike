@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col toggle_sidebar h-100">
+<div class="row bg-white">
+  <div class="col bg-white toggle_sidebar h-100">
     <div id="accordion">
       <ul>
         <li>
@@ -16,10 +16,14 @@
 
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="">
-                <ul>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
+                <ul class="pl-4">
+                  <% if @joined_groups %>
+                      <% @joined_groups.each do |group| %>
+                        <%= link_to group_posts_path(group) do %>
+                          <li class="py-2 my-1 submenu_toggle"><%= group.name %></li>
+                        <% end %>
+                      <% end %>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -39,10 +43,14 @@
 
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="">
-                <ul>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
+                <ul class="pl-4">
+                  <% if @other_groups %>
+                      <% @other_groups.each do |group| %>
+                        <%= link_to new_group_join_group_path(group) do %>
+                          <li class="py-2 my-1 submenu_toggle"><%= group.name %></li>
+                        <% end %>
+                      <% end %>
+                  <% end %>
                 </ul>
               </div>
             </div>

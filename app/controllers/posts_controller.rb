@@ -8,6 +8,8 @@ class PostsController < ApplicationController
   def index
     @posts = @group.posts.order(created_at: :desc)
     @user = current_user
+    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     respond_to do |format|
       if check_join_group.any?
         @username = @user.join_groups.find_by(group_id: @group.id).username

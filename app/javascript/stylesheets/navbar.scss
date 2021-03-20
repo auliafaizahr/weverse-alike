@@ -22,7 +22,7 @@
 .toggle_sidebar {
   position: fixed;
   top: 4.5em;
-  left: 1em;
+  left: 0;
   padding-top: 1em;
   border-right: 1px solid lightgray;
   width: 15em;
@@ -37,5 +37,10 @@
     &:hover{
       cursor: pointer;
     }
+  }
+
+  .submenu_toggle {
+    border-left: 1px solid #0BE4BF;
+    padding-left: 10px;
   }
 }
