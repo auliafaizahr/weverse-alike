@@ -1,20 +1,22 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group, only: [:show, :edit]
+  before_action :set_user, only: [:show, :edit]
 
   def index
   end
 
+  
   def show
-    @user = current_user
     respond_to do |format|
       format.html
     end
   end
 
   def edit
+    @group_artists = JoinGroup.where(group_id: @group.id).joins(:user).where(users: {type_user: 0})
     respond_to do |format|
-      format.js { render layout: false }
+      format.html
     end
   end
 
@@ -36,8 +38,11 @@ class GroupsController < ApplicationController
 
   private
   def set_group
-    binding.pry
     @group = Group.find(params[:id])
+  end
+
+  def set_user
+    @user = current_user
   end
 
   def post_params

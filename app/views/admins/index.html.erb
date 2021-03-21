@@ -4,7 +4,7 @@
 
 <div class="row row_content">
   <div class="col row d-flex flex-row">
-    <table>
+    <table class="table table-striped">
       <tr>
         <th>Group</th>
         <th>Action</th>
@@ -13,7 +13,7 @@
         <tr>
           <td><%= group.name %></td>
           <td>
-            <%= link_to  "Edit", edit_group_path(group), remote: true, data: {toggle: "modal", target: "#modal_shared"} %>
+            <%= link_to  "Edit", edit_group_path(group) %>
           </td>
         </tr>
     <% end %>
