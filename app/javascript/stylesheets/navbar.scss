@@ -26,6 +26,8 @@
   padding-top: 1em;
   border-right: 1px solid lightgray;
   width: 15em;
+  visibility: visible;
+  opacity: 1;
 
   ul {
     list-style: none;
@@ -43,4 +45,14 @@
     border-left: 1px solid #0BE4BF;
     padding-left: 10px;
   }
+}
+
+#sidebar_toggle_menu {
+  transition: .3s;
+}
+
+.collapsed_active {
+  visibility: hidden;
+  opacity: 0;
+  transition: margin 0.3s ease;
 }

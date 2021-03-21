@@ -30,5 +30,6 @@ import './home'
 import './alert'
 import './join_group'
 import './media'
+import './sidebar'
 
 
