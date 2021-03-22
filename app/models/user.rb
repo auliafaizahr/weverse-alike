@@ -30,5 +30,5 @@ class User < ApplicationRecord
 
   scope :artist, -> { where("type_user = 0")}
 
-  scope :join_groups, -> { JoinGroup.where(user_id: current_user.id) }
+  scope :join_group, -> { JoinGroup.where(user_id: current_user.id) }
 end

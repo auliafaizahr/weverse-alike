@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   layout "layouts/home"
 
   def index
-    @posts = @group.posts.order(created_at: :desc)
+    @posts =  Post.includes(:join_group).where(group_id: @group)
     @user = current_user
     @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
     @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))

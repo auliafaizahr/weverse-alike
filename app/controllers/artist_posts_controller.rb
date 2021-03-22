@@ -10,8 +10,6 @@ class ArtistPostsController < ApplicationController
   end
 
   def show
-    
-      
   end
 
   def edit

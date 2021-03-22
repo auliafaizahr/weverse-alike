@@ -1,106 +1,109 @@
 <%= render 'shared/modal' %>
-<% posts.each do |post| %>
-  <% unless post.user_id.nil? %>
-    <div class="card mt-4 post-user">
-      <div class="card-body">
-        <h5 class="card-title">Moments</h5>
-        <div class="row">
-          <div class="col-2">
-            <% if user_avatar_exist(@group, post.user) %>
-              <%= image_tag user_avatar(@group, post.user).avatar, class: 'profile_picture_moment' %>
-            <% else %>
-              <%= image_tag 'default.jpg', class: 'profile_picture' %>
-            <% end %>
-          </div>
-          <div class="col-7">
-            <ul class="user">
-              <li class="username">
-                <p class="username_display mb-0">
-                  <%= post.user.nickname(post.user, @group) unless post.user.nil? %>
-                  <% if post.user.artist?(post.user) %>
-                    <span><img class="verif_icon" src="https://img.icons8.com/color/48/000000/verified-badge.png"/></span>
-                  <% end %>
-                </p>
-              </li>
-              <li class="date_post"><%= post.created_at %></li>
-              <li class="mt-3">
-                <p>
-                  <%= post.post %>
-                </p>
-              </li>
-              <% if post.post_attachments.any? %>
-                <li class="d-flex flex-wrap w-100" style="display: flex;">
-                  <% post.post_attachments.each do |attachment| %>
-                    <ul class="pl-1 my-1" style="list-style: none;">
-                      <li>
-                        <%= image_tag attachment.avatar.url, style: "height: 150px; border-radius: 5px;" %>
-                      </li>
-                    </ul>
-                  <% end %>
-                </li>
+<% if posts %>
+  <% posts.each do |post| %>
+    <% unless post.user_id.nil? %>
+      <div class="card mt-4 post-user">
+        <div class="card-body">
+          <h5 class="card-title">Moments</h5>
+          <div class="row">
+            <div class="col-2">
+              <% if user_avatar_exist(@group, post.user) %>
+                <%= image_tag user_avatar(@group, post.user).avatar, class: 'profile_picture_moment' %>
+              <% else %>
+                <%= image_tag 'default.jpg', class: 'profile_picture' %>
               <% end %>
-            </ul>
+            </div>
+            <div class="col-7">
+              <ul class="user">
+                <li class="username">
+                  <p class="username_display mb-0">
+                    <%= post.user.nickname(post.user, @group) unless post.user.nil? %>
+                    <% if post.user.artist?(post.user) %>
+                      <span><img class="verif_icon" src="https://img.icons8.com/color/48/000000/verified-badge.png"/></span>
+                    <% end %>
+                  </p>
+                </li>
+                <li class="date_post"><%= post.created_at %></li>
+                <li class="mt-3">
+                  <p>
+                    <%= post.post %>
+                  </p>
+                </li>
+                <% if post.post_attachments.any? %>
+                  <li class="d-flex flex-wrap w-100" style="display: flex;">
+                    <% post.post_attachments.each do |attachment| %>
+                      <ul class="pl-1 my-1" style="list-style: none;">
+                        <li>
+                          <%= image_tag attachment.avatar.url, style: "height: 150px; border-radius: 5px;" %>
+                        </li>
+                      </ul>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="col-3">
+              <ul class="menu">
+                <li><i class="fas fa-language"></i></li>
+                <li>
+                <div class="dropdown">
+                  <button type="button" class="btn-menu-post" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v" data-toggle="dropdown" id="dropdon"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <%= link_to  "Copy Post", group_posts_path(@group), class: "dropdown-item" %>
+                    <% if current_user.id == post.user.id %>
+                      <%= link_to  "Edit Post", edit_group_post_path(@group, post), remote: true, data: { target: "#modal_shared" }, class: "dropdown-item" %>
+                      <%= link_to  "Delete Post", group_post_path(@group, post), method: :delete, class: "dropdown-item" %>
+                    <% end %>
+                  </div>
+                </div>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="col-3">
-            <ul class="menu">
-              <li><i class="fas fa-language"></i></li>
-              <li>
-              <div class="dropdown">
-                <button type="button" class="btn-menu-post" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v" data-toggle="dropdown" id="dropdon"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <%= link_to  "Copy Post", group_posts_path(@group), class: "dropdown-item" %>
-                  <% if current_user.id == post.user.id %>
-                    <%= link_to  "Edit Post", edit_group_post_path(@group, post), remote: true, data: { target: "#modal_shared" }, class: "dropdown-item" %>
-                    <%= link_to  "Delete Post", group_post_path(@group, post), method: :delete, class: "dropdown-item" %>
+          <div class="row posted">
+            <div class="col"></div>
+          </div>
+          <div class="row cheers py-3">
+            <div class="col">
+              <ul class="cheers py-2">
+                <li class="mr-4 cheers_button">
+                  <%= render 'shared/likes/form', likeable: post %>
+                </li>
+                <li class="mr-4">
+                  <i class="far fa-comment cheers_button"></i>
+                    <% if post.comments.any? %>
+                      <%= post.comments.size %> <span>Comments</span>
+                    <% else %>
+                      <span>Comment First</span>
+                    <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <% if post.comments %>
+                <% post.comments.each do |comment| %>
+                  <%= render 'shared/comments', comment: comment %>
+                <% end %>
+              <% end %>
+              <div class="row comment_posted">
+                <div class="col-1">
+                  <% if @user.avatar.attached? %>
+                    <%= image_tag @user.avatar, class: 'profile_picture' %>
+                  <% else %>
+                    <%= image_tag 'default.jpg', class: 'profile_picture' %>
                   <% end %>
                 </div>
+                <%= render 'comments/new', post: post  %>
               </div>
-              </li>
-            </ul>
           </div>
-        </div>
-        <div class="row posted">
-          <div class="col"></div>
-        </div>
-        <div class="row cheers py-3">
-          <div class="col">
-            <ul class="cheers py-2">
-              <li class="mr-4 cheers_button">
-                <%= render 'shared/likes/form', likeable: post %>
-              </li>
-              <li class="mr-4">
-                <i class="far fa-comment cheers_button"></i>
-                  <% if post.comments.any? %>
-                    <%= post.comments.size %> <span>Comments</span>
-                  <% else %>
-                    <span>Comment First</span>
-                  <% end %>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <% if post.comments %>
-              <% post.comments.each do |comment| %>
-                <%= render 'shared/comments', comment: comment %>
-              <% end %>
-            <% end %>
-            <div class="row comment_posted">
-              <div class="col-1">
-                <% if @user.avatar.attached? %>
-                  <%= image_tag @user.avatar, class: 'profile_picture' %>
-                <% else %>
-                  <%= image_tag 'default.jpg', class: 'profile_picture' %>
-                <% end %>
-              </div>
-              <%= render 'comments/new', post: post  %>
-            </div>
         </div>
       </div>
     </div>
-  </div>
+    <% end %>
   <% end %>
+  
 <% end %>

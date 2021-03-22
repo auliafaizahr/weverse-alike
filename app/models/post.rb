@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   belongs_to :group
+  belongs_to :join_group
 
   has_many_attached :images, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
