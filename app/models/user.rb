@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum type_user: [:Artist, :User]
+  enum type_user: [:Artist, :User, :Admin]
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -29,6 +29,8 @@ class User < ApplicationRecord
   end
 
   scope :artist, -> { where("type_user = 0")}
+
+  scope :admin, -> { where("type_user = 2")}
 
   scope :join_group, -> { JoinGroup.where(user_id: current_user.id) }
 end

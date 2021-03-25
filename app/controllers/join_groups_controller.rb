@@ -1,8 +1,8 @@
 class JoinGroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:index, :create, :new, :destroy, :edit, :update]
+  before_action :set_group, only: [:index, :create, :new, :destroy, :edit, :update, :join_new]
   before_action :set_user, only: [:new, :destroy, :edit, :update, :create]
-  before_action :set_join_group, only: [:new, :destroy, :edit, :update, :create]
+  before_action :set_join_group, only: [:destroy, :edit, :update]
 
   def new
     @title = "You havent join this"
@@ -16,8 +16,11 @@ class JoinGroupsController < ApplicationController
   end
 
   def create
+    binding.pry
+    @join_group = @group.join_groups.build(join_group_params)
+    @join_group.user_id = current_user.id
     respond_to do |format|
-      if @join_group && @join_group.save
+      if @join_group.save
         format.html { redirect_to group_posts_path(@group), notice: 'Welcome!' }
       else
         format.js { flash[:warning] = "The username already exist" }
@@ -26,19 +29,33 @@ class JoinGroupsController < ApplicationController
   end
 
   def edit
-    
+    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     respond_to do |format|
       format.js { render layout: false }
     end
   end
 
   def update
+    binding.pry
     respond_to do |format|
       if @join_group.update(join_group_params)
-        format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
+        if @user.Admin?
+          format.html { redirect_to edit_group_path(@group), notice: 'Username updated successfuly' }
+        else
+          format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
+        end
       else
         format.js { flash[:warning] = "The username already exist." }
       end
+    end
+  end
+
+  def join_new
+    # @join_group = @group.join_groups.find(params[:join_group_id])
+    @artists = User.artist
+    respond_to do |format|
+      format.js { render layout: false }
     end
   end
 
@@ -53,7 +70,7 @@ class JoinGroupsController < ApplicationController
   end
 
   def set_join_group
-    @join_group = @group.join_groups.find_by(user_id: @user)
+    @join_group = @group.join_groups.find(params[:id])
   end
 
   def join_group_params

@@ -1,9 +1,6 @@
 <div class="col ml-3">
-  <% binding.pry %>
   <%= simple_form_for([@group, @group.join_groups.build]) do |f| %>
     <div class="row input-group mb-3 comment_box">
-      <%= f.select :user_id, User.artist.map { |r| [r.name, r.id,] }, include_blank: true %>
-
       <%= f.input :username, label: "Username" %>
       <div class="input-group">
         <%= f.button :submit, "Send", class: "btn btn-outline-secondary comment_button"  %>

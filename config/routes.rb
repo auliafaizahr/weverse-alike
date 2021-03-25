@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   resources :admins
 
   resources :groups do
-    resources :join_groups
+    get "join_groups/join_new", to: 'join_groups#join_new'
 
+    resources :join_groups do
+      # get :join_new
+    end
     resources :posts do
       resources :likes, only: [:create, :destroy]
       resources :comments do
