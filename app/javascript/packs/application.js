@@ -24,6 +24,7 @@ require("bootstrap")
 require("@fortawesome/fontawesome-free/scss/fontawesome.scss")
 require("@fortawesome/fontawesome-free/js/all.js")
 require("owl.carousel/dist/owl.carousel.min")
+require("select2/dist/js/select2.min.js")
 
 
 import './home'
@@ -31,5 +32,6 @@ import './alert'
 import './join_group'
 import './media'
 import './sidebar'
+import './profile'
 
 

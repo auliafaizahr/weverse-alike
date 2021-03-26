@@ -25,7 +25,7 @@
         <div class="row col justify-content-between">
           <h4>Group Artists : </h4>
           <%= link_to group_join_groups_join_new_path(@group), remote: true, data: {toggle: "modal", target: "#modal_shared"} do %>
-            <button type="button" class="btn btn-light"><i class="fas fa-plus"></i>Tambah</button>
+            <button type="button" class="btn btn-light"><i class="fas fa-plus"></i>Tambah Artist</button>
           <% end %>
         </div>
       </div>
@@ -52,6 +52,9 @@
           </tr>
         <% end %>
       </table>
+      <%= link_to new_group_profiles_path(@group), remote: true, data: {toggle: "modal", target: "#modal_shared"} do %>
+        <button type="button" class="btn btn-light"><i class="fas fa-plus"></i>Tambah User</button>
+      <% end %>
     </div>
   </div>
 </div>

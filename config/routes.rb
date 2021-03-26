@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :admins
 
   resources :groups do
+    resource :profiles
+
     get "join_groups/join_new", to: 'join_groups#join_new'
 
     resources :join_groups do
@@ -37,7 +39,6 @@ Rails.application.routes.draw do
       resources :feed_artists
     end
   end
-  resource :profiles
 
   root 'front_pages#index'
 

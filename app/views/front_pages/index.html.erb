@@ -9,7 +9,11 @@
         <% if @user.join_group?(@user, group).any? %>
           <%= link_to group_posts_path(group) do %>
             <div class="card" style="border-radius: 15px;">
-              <%= image_tag 'login.jpg', class: "img_thumbnail_group" %>
+              <% if group.avatar.attached? %>
+                <%= image_tag group.avatar, class: "img_thumbnail_group" %>
+              <% else %>
+                <%= image_tag 'login.jpg', class: "img_thumbnail_group" %>
+              <% end %>
               <div class="card-body">
                 <%= group.name %>
               </div>
@@ -18,7 +22,11 @@
         <% else %>
           <%= link_to new_group_join_group_path(group) do %>
             <div class="card" style="border-radius: 15px;">
-              <%= image_tag 'login.jpg', class: "img_thumbnail_group" %>
+              <% if group.avatar.attached? %>
+                <%= image_tag group.avatar, class: "img_thumbnail_group" %>
+              <% else %>
+                <%= image_tag 'login.jpg', class: "img_thumbnail_group" %>
+              <% end %>
               <div class="card-body">
                 <%= group.name %>
               </div>

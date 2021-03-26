@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_group, only: [:new, :create, :edit]
 
   def index
     @user = current_user
@@ -7,12 +8,30 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @user = current_user
-    
+    @user = User.new
+    respond_to do |format|
+      format.js { render layout: false }
+    end
   end
 
   def create
-    
+    binding.pry
+    @user = User.new(user_params)
+    respond_to do |format|
+      if @user.save
+        if current_user.Admin?
+          format.html { redirect_to group_path(@group), notice: 'User was successfully updated.' }
+        else
+          format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        end
+      else
+        if current_user.Admin?
+          format.html { redirect_to group_path(@group), notice: 'User was successfully updated.' }
+        else
+          format.html { redirect_to root_path, notice: 'User was successfully updated.' }
+        end
+      end
+    end
   end
   
   def edit
@@ -34,7 +53,11 @@ class ProfilesController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :avatar, :name, :username)
+    params.require(:user).permit(:email, :avatar, :name, :username, :type_user, :password)
+  end
+
+  def set_group
+    @group = Group.find(params[:group_id])
   end
 
 end

@@ -18,8 +18,10 @@
   <div class="col-lg-6 col-md-6 justify-content-end">
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <%= link_to edit_profiles_path, class: "nav-link" do %>
-          <i class="fas fa-user"></i>
+        <% if @group %>
+          <%= link_to edit_group_profiles_path(@group), class: "nav-link" do %>
+            <i class="fas fa-user"></i>
+          <% end %>
         <% end %>
       </li>
       <li class="nav-item">

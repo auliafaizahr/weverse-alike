@@ -1,0 +1,53 @@
+<div class="row col">
+  <div class="col">
+    <h3>Add New User</h3>
+    <%= simple_form_for(@user, url: group_profiles_path(@group), remote: true) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs form_edit_profile">
+        <div class="row">
+          <div class="col-2">
+            <% if @user.avatar.attached? %>
+              <%= image_tag @user.avatar, style: "width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" %>
+            <% end %>
+          </div>
+          <div class="col-10 px-5 align-self-center">
+            <%= f.file_field :avatar %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="">Type User :</label>
+            <%= f.select :type_user, User.type_users.keys, {}, { class: 'form-control js-example-basic-single' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :name, label: "Name", input_html: { class: "d-flex flex-column shadow p-3 bg-white rounded px-3 py-2"} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :username, label: "Username", input_html: { class: "d-flex flex-column shadow p-3 bg-white rounded px-3 py-2"} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :email, label: "Email", input_html: { class: "d-flex flex-column shadow p-3 bg-white rounded px-3 py-2"} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :password, label: "Password", 
+                                  style: "width: 100%;",
+                                  input_html: { style: "width: 100%;", class: "shadow p-3 bg-white rounded px-3 py-2" } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.button :submit, "Add", class: "edit_profile_button" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

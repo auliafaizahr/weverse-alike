@@ -1,5 +1,7 @@
 $(document).ready(function() {
   $('.modal_all').modal('toggle');
-  $(".modal-body").html("<%= escape_javascript(render partial: 'form' ) %>");
+  $(".modal-body").html("<%= escape_javascript(render partial: 'new' ) %>");
   $(".modal-title").html("Add New Artist");
+  $('.js-example-basic-single').select2({width: '100%' });
 });
+

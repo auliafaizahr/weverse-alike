@@ -17,11 +17,14 @@ class JoinGroupsController < ApplicationController
 
   def create
     binding.pry
-    @join_group = @group.join_groups.build(join_group_params)
-    @join_group.user_id = current_user.id
+    check_user
     respond_to do |format|
       if @join_group.save
-        format.html { redirect_to group_posts_path(@group), notice: 'Welcome!' }
+        if @user.Admin?
+          format.html { redirect_to group_path(@group), notice: 'Username updated successfuly' }
+        else
+          format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
+        end
       else
         format.js { flash[:warning] = "The username already exist" }
       end
@@ -41,7 +44,7 @@ class JoinGroupsController < ApplicationController
     respond_to do |format|
       if @join_group.update(join_group_params)
         if @user.Admin?
-          format.html { redirect_to edit_group_path(@group), notice: 'Username updated successfuly' }
+          format.html { redirect_to group_path(@group), notice: 'Username updated successfuly' }
         else
           format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
         end
@@ -57,6 +60,20 @@ class JoinGroupsController < ApplicationController
     respond_to do |format|
       format.js { render layout: false }
     end
+  end
+
+  def check_user
+    if current_user.Admin?
+      join_group_params = params.require(:join_group).permit(:username, :avatar, :user_id)
+      @join_group = @group.join_groups.build(join_group_params)
+    else
+      @join_group = @group.join_groups.build(join_group_params)
+      @join_group.user_id = current_user.id
+    end
+  end
+
+  def return_page_user
+    
   end
 
   private
