@@ -64,6 +64,7 @@ class JoinGroupsController < ApplicationController
 
   def check_user
     if current_user.Admin?
+      binding.pry
       join_group_params = params.require(:join_group).permit(:username, :avatar, :user_id)
       @join_group = @group.join_groups.build(join_group_params)
     else

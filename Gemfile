@@ -7,6 +7,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'carrierwave'
 gem 'devise'
 gem 'gravatar_image_tag'
+gem 'pundit'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'

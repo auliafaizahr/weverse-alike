@@ -1,11 +1,13 @@
 class AdminsController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_authenticate
   # before_action :set_group, only: [:index, :create, :new, :destroy, :edit, :update]
   # before_action :set_post, only: [:destroy, :edit, :update]
   # before_action :check_join_group, only: [:index, :create, :new, :destroy, :edit, :update]
   # layout "layouts/home"
 
   def index
+    binding.pry
     @user = current_user
     @title = "You havent join this group"
     @groups = Group.all
@@ -33,4 +35,7 @@ class AdminsController < ApplicationController
   end
 
   private
+  def admin_authenticate
+    current_user.Admin?
+  end
 end
