@@ -9,9 +9,15 @@
         </span>
       </li>
       <li class="nav-item">
+      <% if current_user.Artist? %>
+        <%= link_to group_posts_path(@group), class: "nav-link" do %>
+          <%= image_tag "weverse_logo.png", style: "width: 6em; height: 1em; object-fit: cover;" %>
+        <% end %>
+      <% else %>
         <%= link_to root_path, class: "nav-link" do %>
           <%= image_tag "weverse_logo.png", style: "width: 6em; height: 1em; object-fit: cover;" %>
         <% end %>
+      <% end %>
       </li>
     </ul>
   </div>
@@ -38,9 +44,13 @@
             <% if @group %>
               <%= link_to  "Change Username",  edit_group_join_group_path(@group, @group.join_groups), remote: true, data: {toggle: "modal", target: "#modal_shared"},class: "dropdown-item" %>
             <% end %>
-            <%= link_to  "Admin Page",  admins_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <% if current_user.Admin? %>
+              <%= link_to  "Admin Page",  admins_path, class: "dropdown-item" %>
+            <% end %>
+            <% if user_signed_in? %>
+              <div class="dropdown-divider"></div>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <% end %>
           </div>
         </div>
       </li>

@@ -2,6 +2,7 @@
   <div class="col bg-white toggle_sidebar h-100 collapsed_active" id="sidebar_toggle_menu">
     <div id="accordion">
       <ul>
+      <% unless current_user.Artist? %>
         <li>
           <div class="card border-0 bg-white card_toggle">
             <div class="card-header  bg-white border-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="headingOne">
@@ -56,6 +57,7 @@
             </div>
           </div>
         </li>
+      <% end %>
         <li>
           <div class="card border-0 bg-white card_toggle">
             <div class="card-header  bg-white border-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne" id="">
