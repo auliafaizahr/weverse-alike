@@ -1,2 +1,8 @@
-
-<%= render 'shared/post_template', posts: @posts %>
+<div class="row">
+  <div class="col">
+    <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+  </div>
+</div>
+<div class="artist_posts">
+  <%= render 'shared/post_template', posts: @posts %>
+</div>
