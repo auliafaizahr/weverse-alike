@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.update(group_params)
         if @user.Admin?
-          format.html { redirect_to edit_group_path(@group), notice: 'Username updated successfuly' }
+          format.html { redirect_to group_path(@group), notice: 'Profile updated successfuly' }
         else
           format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
         end

@@ -56,7 +56,7 @@ class JoinGroupsController < ApplicationController
 
   def join_new
     # @join_group = @group.join_groups.find(params[:join_group_id])
-    @artists = User.artist
+    @artists = User.artist.includes(:join_groups).where.not(id: JoinGroup.select(:user_id))
     respond_to do |format|
       format.js { render layout: false }
     end

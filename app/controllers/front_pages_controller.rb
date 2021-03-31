@@ -4,10 +4,18 @@ class FrontPagesController < ApplicationController
 
   def index
     @user = current_user
+    @group = @user.groups.first
     @title = "You havent join this group"
-    @groups = Group.all
+    @groups = Group.all.order("id ASC")
     @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
     @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    respond_to do |format|
+      if @user.Artist?
+        format.html { redirect_to group_posts_path(@group), alert: 'You cant access this page' }
+      else
+        format.html
+      end
+    end
   end
 
   private
