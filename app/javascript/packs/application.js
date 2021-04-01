@@ -19,6 +19,7 @@ require("jquery-ui")
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
+
 //bootstrap
 require("bootstrap")
 require("bootstrap/dist/js/bootstrap.bundle")
@@ -26,9 +27,13 @@ require("@fortawesome/fontawesome-free/scss/fontawesome.scss")
 require("@fortawesome/fontawesome-free/js/all.js")
 require("owl.carousel/dist/owl.carousel.min")
 require("select2/dist/js/select2.min.js")
-// require("bootstrap-daterangepicker/moment.min.js")
-require("bootstrap-daterangepicker")
+// require("daterangepicker/moment.min.js")
+// require("bootstrap-daterangepicker")
+require("moment")
+// require("daterangepicker")
+// require("bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
 
+import '../../../vendor/daterangepicker/daterangepicker.min'
 import './home'
 import './alert'
 import './join_group'

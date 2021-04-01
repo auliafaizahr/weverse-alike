@@ -25,7 +25,10 @@ Rails.application.routes.draw do
     end
 
     resources :users
+
     resources :artist_posts
+    get 'artist_posts/post_filter', to: 'artist_posts#post_filter'
+
     resources :medias do
       resources :likes, only: [:create, :destroy]
       resources :media_likes, only: [:create, :destroy]

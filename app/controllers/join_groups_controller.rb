@@ -94,5 +94,4 @@ class JoinGroupsController < ApplicationController
   def join_group_params
     params.require(:join_group).permit(:username, :avatar)
   end
-
 end

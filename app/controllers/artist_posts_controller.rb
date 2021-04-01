@@ -5,7 +5,8 @@ class ArtistPostsController < ApplicationController
   layout "layouts/home"
 
   def index
-   @user = current_user
+   binding.pry
+    @user = current_user
     
   end
 
@@ -22,6 +23,15 @@ class ArtistPostsController < ApplicationController
 
   def destroy
     
+  end
+
+  def post_filter
+    binding.pry
+    @artist = @group.users.artist
+  end
+
+  def show
+  
   end
 
   private
