@@ -1,42 +1,46 @@
 class ArtistPostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group
-  before_action :set_posts, only: [:index]
   layout "layouts/home"
 
   def index
-   binding.pry
     @user = current_user
-    
+    if params[:date_filter]
+      post_filter
+    else
+      set_posts
+    end
   end
 
   def show
   end
 
   def edit
-    
+
+
+
   end
 
   def update
-    
+
   end
 
   def destroy
-    
+
   end
 
   def post_filter
-    binding.pry
     @artist = @group.users.artist
-  end
-
-  def show
-  
-  end
-
-  private
-  def set_group
-    @group = Group.find(params[:group_id])
+    date_params = params[:date_filter].gsub(/\s+/, "").split("-")
+    date_params = params[:date_filter].gsub(/\s+/, "").split("-")
+    date_start = Date.strptime(date_params.first, "%m/%d/%Y")
+    date_end = Date.strptime(date_params.last, "%m/%d/%Y")
+    @posts = []
+    @artist.each do |artist|
+      artist.posts.where(:created_at => date_start.beginning_of_day..date_end.end_of_day).each do |post|
+        @posts << post
+      end
+    end
   end
 
   def set_posts
@@ -49,4 +53,10 @@ class ArtistPostsController < ApplicationController
       end
     end
   end
+
+  private
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
+
 end
