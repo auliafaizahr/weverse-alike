@@ -4,9 +4,14 @@ class ArtistPostsController < ApplicationController
   layout "layouts/home"
 
   def index
+    binding.pry
     @user = current_user
-    if params[:date_filter]
+    if !params[:date_filter].empty?
       post_filter
+      respond_to do |format|
+        format.html
+        format.js { render layout: false }
+      end
     else
       set_posts
     end
@@ -37,10 +42,11 @@ class ArtistPostsController < ApplicationController
     date_end = Date.strptime(date_params.last, "%m/%d/%Y")
     @posts = []
     @artist.each do |artist|
-      artist.posts.where(:created_at => date_start.beginning_of_day..date_end.end_of_day).each do |post|
+      artist.posts.where(:created_at => date_start.beginning_of_day..date_end.end_of_day).order("created_at DESC").each do |post|
         @posts << post
       end
     end
+    @posts = @posts.sort.reverse
   end
 
   def set_posts
@@ -48,10 +54,11 @@ class ArtistPostsController < ApplicationController
     @artist = @group.users.artist
     @posts = []
     @artist.each do |artist|
-      artist.posts.each do |post|
+      artist.posts.order("created_at DESC").each do |post|
         @posts << post
       end
     end
+    @posts = @posts.sort.reverse
   end
 
   private

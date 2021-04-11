@@ -1,10 +1,13 @@
-<%= form_with(url: group_artist_posts_path(@group), method: :get) do |f| %>
-  <div class="input-group">
-  <label for="choose_artist">
-    Choose Artist
-    <%= f.select :user_id, @artist.map { |r| [r.name, r.id,] }, {}, { class: "form-control choose_artist_filter", id: "choose_artist" } %>
-  </label>
-  <%= f.text_field :date_range, name: "date_filter", label: "text", input_html: { id: "choose_date" }, value: "" %>
-  <%= f.submit %>
+<%= form_with(url: group_artist_posts_path(@group), method: :get, remote: true) do |f| %>
+  <div class="row">
+    <div class="col-6">
+        <label for="">Choose Artist</label>
+        <%= f.select :user_id, @artist.map { |r| [r.name, r.id,] }, {}, { class: "form-control choose_artist_filter", id: "choose_artist" } %>
+    </div>
+    <div class="col-6">
+      <label for="">Choose Date Range</label>
+      <%= f.text_field :date_range, name: "date_filter", label: "text", input_html: { id: "choose_date" }, value: "" %>
+      <%= f.submit "Filter" %>
+    </div>
   </div>
 <% end %>
