@@ -19,7 +19,6 @@ class ArtistPostsController < ApplicationController
 
   def check_date
     @posts = []
-    binding.pry
     if params[:date_filter].empty?
       if params[:user_id]
         set_artist
@@ -87,7 +86,6 @@ class ArtistPostsController < ApplicationController
   end
 
   def post_filter
-    binding.pry
     @artists = @group.users.artist
     date_params = params[:date_filter].gsub(/\s+/, "").split("-")
     date_params = params[:date_filter].gsub(/\s+/, "").split("-")

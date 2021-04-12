@@ -5,13 +5,18 @@ class MediasController < ApplicationController
   # layout 'watch_layout', only: [:show]
 
   def index
-    @media_categories = @group.media_video_categories
-    @medias = @group.media_videos
-    @sort_by = [{id: 1, value: "DESC"}, {id: 2, value: "ASC"}]
     @user = current_user
     @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
     @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
-    binding.pry
+    
+    if params[:category_id]
+      @media_category = @group.media_video_categories.find(params[:category_id])
+      @medias = @group.media_videos.where(media_video_category_id: params[:category_id])
+    else
+      @media_categories = @group.media_video_categories
+      @medias = @group.media_videos
+    end
+    
     respond_to do |format|
       format.html
       format.js

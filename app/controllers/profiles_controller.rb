@@ -15,7 +15,6 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save

@@ -16,7 +16,6 @@ class JoinGroupsController < ApplicationController
   end
 
   def create
-    binding.pry
     check_user
     respond_to do |format|
       if @join_group.save
@@ -40,7 +39,6 @@ class JoinGroupsController < ApplicationController
   end
 
   def update
-    binding.pry
     respond_to do |format|
       if @join_group.update(join_group_params)
         if @user.Admin?
@@ -64,7 +62,7 @@ class JoinGroupsController < ApplicationController
 
   def check_user
     if current_user.Admin?
-      binding.pry
+
       join_group_params = params.require(:join_group).permit(:username, :avatar, :user_id)
       @join_group = @group.join_groups.build(join_group_params)
     else
@@ -88,7 +86,8 @@ class JoinGroupsController < ApplicationController
   end
 
   def set_join_group
-    @join_group = @group.join_groups.find(params[:id])
+    binding.pry
+    @join_group = @group.join_groups.find_by(group_id: params[:group_id], user_id: current_user.id)
   end
 
   def join_group_params

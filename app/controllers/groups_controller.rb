@@ -24,7 +24,6 @@ class GroupsController < ApplicationController
   end
 
   def update
-    binding.pry
     respond_to do |format|
       if @group.update(group_params)
         if @user.Admin?
