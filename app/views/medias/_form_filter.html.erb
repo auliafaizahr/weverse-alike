@@ -1,0 +1,13 @@
+<%= form_with(url: group_medias_path(@group), method: :get, remote: true) do |f| %>
+  <div class="row align-items-end">
+    <div class="col-6">
+      <label for="">Choose Category</label>
+      <%= f.select :category_id, @media_categories.map { |r| [r.name, r.id,] }, {}, { class: "form-control choose_artist_filter", id: "choose_category" } %>
+    </div>
+    <div class="col-6">
+      <label for="">Sort by</label>
+      <%= f.select :sort_by, ['DESC', 'ASC'], {}, { class: "form-control choose_sort" } %>
+      <%= f.submit "Filter" %>
+    </div>
+  </div>
+<% end %>

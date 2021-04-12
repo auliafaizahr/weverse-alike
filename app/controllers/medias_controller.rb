@@ -6,9 +6,17 @@ class MediasController < ApplicationController
 
   def index
     @media_categories = @group.media_video_categories
+    @medias = @group.media_videos
+    @sort_by = [{id: 1, value: "DESC"}, {id: 2, value: "ASC"}]
     @user = current_user
     @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
     @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    binding.pry
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @medias }
+    end
   end
 
   def show

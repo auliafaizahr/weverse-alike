@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-6">
         <label for="">Choose Artist</label>
-        <%= f.select :user_id, @artist.map { |r| [r.name, r.id,] }, {}, { class: "form-control choose_artist_filter", id: "choose_artist" } %>
+        <%= f.select :user_id, @artists.map { |r| [r.name, r.id,] }, {}, { class: "form-control choose_artist_filter", id: "choose_artist" } %>
     </div>
     <div class="col-6">
       <label for="">Choose Date Range</label>

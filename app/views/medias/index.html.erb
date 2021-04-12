@@ -1,3 +1,8 @@
+<div class="row mb-4">
+  <div class="col">
+    <%= render 'form_filter' %>
+  </div>
+</div>
 
 <div class="card">
   <% @media_categories.each do |media_category| %>
@@ -12,7 +17,7 @@
               <div class="item d-flex flex-column" >
                 <%= image_tag video.thumbnail_url, class: "img-thumbnail" %>
                 <span class="text-center" ><%= video.title %></span>
-              </div>
+             9 </div>
             <% end %>
           <% end %>
         </div>
@@ -22,3 +27,6 @@
   </div>
   <% end %>
 </div>
+
+
+
