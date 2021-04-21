@@ -47,7 +47,9 @@ class JoinGroupsController < ApplicationController
           format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
         end
       else
-        format.js { flash[:warning] = "The username already exist." }
+        @join_group.errors.full_messages.each do |error_message|
+          format.js { flash[:warning] = error_message }
+        end
       end
     end
   end
@@ -62,12 +64,12 @@ class JoinGroupsController < ApplicationController
 
   def check_user
     if current_user.Admin?
-
       join_group_params = params.require(:join_group).permit(:username, :avatar, :user_id)
       @join_group = @group.join_groups.build(join_group_params)
     else
       @join_group = @group.join_groups.build(join_group_params)
       @join_group.user_id = current_user.id
+      @join_group.username = params[:join_group][:username]
     end
   end
 
@@ -86,11 +88,10 @@ class JoinGroupsController < ApplicationController
   end
 
   def set_join_group
-    binding.pry
-    @join_group = @group.join_groups.find_by(group_id: params[:group_id], user_id: current_user.id)
+    @join_group = @group.join_groups.find_by(group_id: params[:group_id], user_id: current_user.id )
   end
 
   def join_group_params
-    params.require(:join_group).permit(:username, :avatar)
+    params.require(:join_group).permit(:username, :avatar, :user_id)
   end
 end
