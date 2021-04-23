@@ -49,5 +49,8 @@ end
 
 def create_comment
   Post.first.comments.build(comment: "Ini komen pertama", user_id: User.first.id).save
+end
+
+def create_likes_on_comment
   Post.first.comments.first.likes.build(user_id: User.first.id).save
 end

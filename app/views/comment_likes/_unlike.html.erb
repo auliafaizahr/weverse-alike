@@ -1,5 +1,5 @@
 <% if comment.commentable_type == "Post" %>
-  <%= link_to group_post_comment_comment_like_path(@group, comment.id, comment, comment.likes), method: :delete, remote: true  do %>
+  <%= link_to group_post_comment_comment_like_path(@group, comment.id, comment, comment.likes), id: "unlike_comment", method: :delete, remote: true  do %>
     <i class="far fa-thumbs-up heart-filled"></i>
   <% end %>
 <% elsif comment.commentable_type == "MediaVideo" %>
