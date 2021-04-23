@@ -55,13 +55,13 @@ class PostsController < ApplicationController
     # @post = @group.posts.new(post_params)
     @post = @group.posts.build(post_params)
     @post.user_id = current_user.id
+    if params[:post_attachments]
+      params[:post_attachments]['avatar'].each do |avatar|
+        @post.post_attachments.build(avatar: avatar)
+      end
+    end
     respond_to do |format|
       if @post.save
-        if params[:post_attachments]
-          params[:post_attachments]['avatar'].each do |a|
-            @post_attachment = @post.post_attachments.create!(:avatar => a, :post_id=> @post.id)
-          end
-        end
         format.html { redirect_to group_posts_path(@group), notice: 'Post was successfully created.' }
         format.json { render :index, status: :created, location: @post }
       else

@@ -69,6 +69,65 @@ RSpec.describe "User Activity", js:true, type: :system do
       end
     end
 
+    context 'when create post' do
+      before(:each) do
+        login_user
+        username_first
+        to_group_posts
+      end
+
+      it 'success with writing only', js: true do
+        visit(group_posts_path(Group.first))
+        fill_in 'post[post]', with: 'This is my first post'
+        find_button('Post').click
+        expect([:notice]).to be_present
+      end
+
+      it 'upload valid one attachment and succeed', js: true do
+        visit(group_posts_path(Group.first))
+        fill_in 'post[post]', with: 'Try with attachment'
+        Capybara.ignore_hidden_elements = false
+        attach_file('post_attachments[avatar][]', '/home/auliafaizahr/Pictures/porto/taehyuuun.png')
+        find_button('Post').click
+        expect([:notice]).to be_present
+      end
+
+      it 'attach more than one valid attachments and succeed', js: true do
+        visit(group_posts_path(Group.first))
+        fill_in 'post[post]', with: 'Try with attachment'
+        Capybara.ignore_hidden_elements = false
+        attach_file('post_attachments[avatar][]', ['/home/auliafaizahr/Pictures/porto/taehyuuun.png', '/home/auliafaizahr/Downloads/5ce1d72c-0129-414a-a9fa-adf1d31f155a.jpeg' ])
+        find_button('Post').click
+        expect([:notice]).to be_present
+      end
+
+      it 'failed because its empty post', js: true do
+        visit(group_posts_path(Group.first))
+        fill_in 'post[post]', with: ' '
+        find_button('Post').click
+        expect([:warning]).to be_present
+      end
+
+      it 'failed because the attachments is too big', js: true do
+        visit(group_posts_path(Group.first))
+        fill_in 'post[post]', with: 'Try with attachment'
+        Capybara.ignore_hidden_elements = false
+        attach_file('post_attachments[avatar][]', ['/home/auliafaizahr/Pictures/EoyHrWNUYAAqkfk.jpeg'])
+        find_button('Post').click
+        expect([:warning]).to be_present
+      end
+
+      it 'failed because the attachments type isnt valid', js: true do
+        visit(group_posts_path(Group.first))
+        fill_in 'post[post]', with: 'Try with attachment'
+        Capybara.ignore_hidden_elements = false
+        attach_file('post_attachments[avatar][]', ['/home/auliafaizahr/Downloads/trymyui_tester_agreement.pdf'])
+        find_button('Post').click
+        expect([:warning]).to be_present
+      end
+
+    end
+
     def login_user
       @user = FactoryBot.create(:user)
       @user.save

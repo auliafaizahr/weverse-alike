@@ -8,4 +8,6 @@ class Post < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :post_attachments, dependent: :destroy
   accepts_nested_attributes_for :post_attachments
+
+  validates :post, presence: true, allow_blank: false
 end

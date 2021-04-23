@@ -39,6 +39,8 @@ Capybara.register_driver :selenium_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
 
+Capybara.ignore_hidden_elements = false
+
 Capybara.javascript_driver = :selenium_chrome
 
 RSpec.configure do |config|

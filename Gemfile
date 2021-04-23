@@ -17,6 +17,8 @@ gem 'sass-rails', '>= 6'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
+gem 'file_validators'
+
 
 group :development, :test do
   gem 'factory_bot_rails'
