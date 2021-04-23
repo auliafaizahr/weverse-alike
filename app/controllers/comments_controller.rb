@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to group_posts_path(@group), notice: 'Comment was successfully created.' }
-        format.json { render :index, status: :created, location: @comment }
+        format.js
       else
         format.html { redirect_to group_posts_path(@group), alert: 'Failed to create comment.' }
       end

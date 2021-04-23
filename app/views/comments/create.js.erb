@@ -1,0 +1,1 @@
+$("#row_posted_comment_<%= @commentable.id %>").append("<%= j(render(partial: 'shared/comments', locals: { comment: @comment }) )%>");

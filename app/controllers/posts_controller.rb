@@ -74,7 +74,6 @@ class PostsController < ApplicationController
     @post.destroy
     respond_to do |format|
       format.html { redirect_to group_posts_path(@group), notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -1,5 +1,5 @@
 <% if likeable.class == Post %>
-  <%= link_to group_post_likes_path(@group, likeable), method: :post, remote: true do  %>
+  <%= link_to group_post_likes_path(@group, likeable), id: 'like_button',  method: :post, remote: true do  %>
     <i class="fas fa-heart"></i>
   <% end %>
 <% elsif likeable.class == MediaVideo %>

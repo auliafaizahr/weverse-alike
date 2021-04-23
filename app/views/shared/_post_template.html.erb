@@ -54,7 +54,7 @@
                     <%= link_to  "Copy Post", group_posts_path(@group), class: "dropdown-item" %>
                     <% if current_user.id == post.user.id %>
                       <%= link_to  "Edit Post", edit_group_post_path(@group, post), remote: true, data: { target: "#modal_shared" }, class: "dropdown-item" %>
-                      <%= link_to  "Delete Post", group_post_path(@group, post), method: :delete, class: "dropdown-item" %>
+                      <%= link_to  "Delete Post", group_post_path(@group, post), method: :delete, remote: true, confirm: "Are you sure?" , class: "dropdown-item" %>
                     <% end %>
                   </div>
                 </div>
@@ -83,12 +83,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="col">
+            <div class="col" id="row_posted_comment_<%= post.id %>">
               <% if post.comments %>
                 <% post.comments.each do |comment| %>
                   <%= render 'shared/comments', comment: comment %>
                 <% end %>
               <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
               <div class="row comment_posted">
                 <div class="col-1">
                   <% if @user.avatar.attached? %>
@@ -99,8 +103,8 @@
                 </div>
                 <%= render 'comments/new', post: post  %>
               </div>
+            </div>
           </div>
-        </div>
       </div>
     </div>
     <% end %>

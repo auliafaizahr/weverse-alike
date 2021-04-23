@@ -6,10 +6,8 @@ class CommentLikesController < ApplicationController
     respond_to do |format|
       if @likeable.likes.where(user_id: current_user.id).first_or_create
         if params[:media_id]
-          format.html { redirect_to group_media_path(@group, @media) }
           format. js { render "comment_likes/create.js" }
         elsif params[:post_id]
-          format.html { redirect_to group_posts_path(@group) }
           format. js { render "comment_likes/create.js" }
         end
       end
