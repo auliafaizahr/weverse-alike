@@ -54,3 +54,59 @@ end
 def create_likes_on_comment
   Post.first.comments.first.likes.build(user_id: User.first.id).save
 end
+
+def create_txt_artists
+  members = [
+              { email: 'csoobin@gmail.com',
+                name: 'Choi Soobin',
+                username: 'csoobin',
+                password: 'password',
+                type_user: 0
+              },
+              { email: 'cyeonjun@gmail.com',
+                name: 'Choi Yeonjun',
+                username: 'cyeonjun',
+                password: 'password',
+                type_user: 0
+              },
+              { email: 'cbeomgyu@gmail.com',
+                name: 'Choi Beomgyu',
+                username: 'cbeomgyu',
+                password: 'password',
+                type_user: 0
+              },
+              { email: 'ktaehyun@gmail.com',
+                name: 'Kang Taehyun',
+                username: 'ktaehyun',
+                password: 'password',
+                type_user: 0
+              },
+              { email: 'hueningkai@gmail.com',
+                name: 'Hueningkai',
+                username: 'hueningkai',
+                password: 'password',
+                type_user: 0
+              }
+  ]
+
+  members.each do |member|
+    user = User.create(email: member[:email], name: member[:name], username: member[:username], password: member[:password], type_user: member[:type_user])
+    user.save
+  end
+
+  txt_artists = User.artist
+  txt_artists.each do |artist|
+    joined = Group.first.join_groups.build(user_id: artist.id, username: artist.username)
+    joined.save
+  end
+end
+
+def artist_create_posts
+  txt_artists = Group.first.users.artist
+  txt_artists.each do |artist|
+    2.times do
+      post = Group.first.posts.build(post: Faker::Lorem.paragraph, user_id: artist.id)
+      post.save
+    end
+  end
+end

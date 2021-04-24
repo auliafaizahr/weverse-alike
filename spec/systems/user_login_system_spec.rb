@@ -1,4 +1,5 @@
 require "rails_helper"
+require_relative './method_helper.rb'
 
 RSpec.describe "Login", js:true, type: :system do
   describe 'Signing in' do
@@ -23,6 +24,16 @@ RSpec.describe "Login", js:true, type: :system do
         fill_in 'user_email', :with => @user.email
         failed_login
       end
+
+      it 'sign out successfully' do
+        login_user
+        to_group_posts
+        visit(group_posts_path(Group.first))
+        execute_script('$(".dropdown-menu").toggleClass("show")')
+        find('.dropdown-item', text: 'Sign out').click
+        expect(page).to have_current_path(new_user_session_path)
+      end
+
     end
 
     context 'Artist sign in' do
