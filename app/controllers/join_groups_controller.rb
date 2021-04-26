@@ -33,6 +33,11 @@ class JoinGroupsController < ApplicationController
   def edit
     @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
     @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    if current_user.Admin?
+      @join_group = @group.join_groups.find(params[:id])
+    else
+      @join_group = @group.join_groups.find_by(group_id: params[:group_id], user_id: current_user.id )
+    end
     respond_to do |format|
       format.js { render layout: false }
     end

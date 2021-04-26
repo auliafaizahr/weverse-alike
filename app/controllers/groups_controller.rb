@@ -25,14 +25,17 @@ class GroupsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @group.update(group_params)
-        if @user.Admin?
+      if @user.Admin?
+        binding.pry
+        if @group.update(group_params)
           format.html { redirect_to group_path(@group), notice: 'Profile updated successfuly' }
         else
-          format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
+          @group.errors.full_messages.each do |error_message|
+            format.js { flash[:warning] = error_message }
+          end
         end
       else
-        format.js { flash[:warning] = "The username already exist." }
+        format.html { redirect_to group_posts_path(@group), notice: 'Username updated successfuly' }
       end
     end
   end

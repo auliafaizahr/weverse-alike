@@ -198,7 +198,6 @@ records = [
   }
 ]
 
-binding.pry
 records.each do |record|
   post = Post.create(post: record[:post], created_at: record[:datetime], user_id: record[:user_id], group_id: record[:group_id])
   post.save

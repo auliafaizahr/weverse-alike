@@ -1,0 +1,7 @@
+$(document).ready(function() {
+  <% if flash[:warning] %>
+    $("#error_message").html('<p class="alert alert-danger"> <%= flash[:warning]%> </p>');
+  <% else %>
+    $('#error_message').html("");
+  <% end %>
+});

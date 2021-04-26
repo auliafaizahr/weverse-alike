@@ -11,7 +11,6 @@ module ControllerMacros
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       user = FactoryBot.create(:user)
-      binding.pry
       sign_in user
     end
   end
