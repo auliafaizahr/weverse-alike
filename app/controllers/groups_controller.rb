@@ -26,7 +26,6 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @user.Admin?
-        binding.pry
         if @group.update(group_params)
           format.html { redirect_to group_path(@group), notice: 'Profile updated successfuly' }
         else
