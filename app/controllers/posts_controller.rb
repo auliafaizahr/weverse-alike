@@ -6,10 +6,12 @@ class PostsController < ApplicationController
   layout "layouts/home"
 
   def index
-    @posts =  Post.where(group_id: @group).order("created_at DESC")
+    @posts =  Post.where(group_id: @group).order("created_at DESC").includes(:user).includes(:post_attachments).includes(:likes).includes(comments: [:user])
+    @posts = @posts.page(params[:page]).per(10)
+    # @posts.paginate(page:params[:page], per_page: 10 )
     @user = current_user
-    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     respond_to do |format|
       if check_join_group.any?
         @username = @user.join_groups.find_by(group_id: @group.id).username

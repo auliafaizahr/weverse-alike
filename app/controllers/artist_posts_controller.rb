@@ -111,11 +111,13 @@ class ArtistPostsController < ApplicationController
     @artists = @group.users.artist
     @posts = []
     @artists.each do |artist|
-      artist.posts.order("created_at DESC").each do |post|
+      artist.posts.includes(:post_attachments, :likes, :comments).order("created_at DESC").each do |post|
         @posts << post
       end
     end
     @posts = @posts.sort.reverse
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(10)
+
   end
 
   private
