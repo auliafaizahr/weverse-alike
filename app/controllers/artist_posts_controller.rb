@@ -22,12 +22,12 @@ class ArtistPostsController < ApplicationController
     if params[:date_filter].empty?
       if params[:user_id]
         set_artist
-        @artist.posts.order("created_at DESC").each do |post|
+        @artist.posts.includes(:likes, :post_attachments, :comments).order("created_at DESC").each do |post|
           @posts << post
         end
       else
         @artists.each do |artist|
-          artist.posts.order("created_at DESC").each do |post|
+          artist.posts.includes(:likes, :post_attachments, :comments).order("created_at DESC").each do |post|
             @posts << post
           end
         end
@@ -36,12 +36,12 @@ class ArtistPostsController < ApplicationController
       set_date
       if params[:user_id]
         set_artist
-        @artist.posts.where(:created_at => @date_start.beginning_of_day..@date_end.end_of_day).order("created_at DESC").each do |post|
+        @artist.posts.includes(:likes, :post_attachments, :comments).where(:created_at => @date_start.beginning_of_day..@date_end.end_of_day).order("created_at DESC").each do |post|
           @posts << post
         end
       else
         @artists.each do |artist|
-          artist.posts.where(:created_at => @date_start.beginning_of_day..@date_end.end_of_day).order("created_at DESC").each do |post|
+          artist.posts.includes(:likes, :post_attachments, :comments).where(:created_at => @date_start.beginning_of_day..@date_end.end_of_day).order("created_at DESC").each do |post|
             @posts << post
           end
         end
@@ -71,20 +71,6 @@ class ArtistPostsController < ApplicationController
   def show
   end
 
-  def edit
-
-
-
-  end
-
-  def update
-
-  end
-
-  def destroy
-
-  end
-
   def post_filter
     @artists = @group.users.artist
     date_params = params[:date_filter].gsub(/\s+/, "").split("-")
@@ -94,12 +80,12 @@ class ArtistPostsController < ApplicationController
     @posts = []
     if params[:user_id]
       artist = @artists.find(params[:user_id])
-      artist.posts.where(:created_at => date_start.beginning_of_day..date_end.end_of_day).order("created_at DESC").each do |post|
+      artist.posts.includes(:likes, :post_attachments, :comments).where(:created_at => date_start.beginning_of_day..date_end.end_of_day).order("created_at DESC").each do |post|
         @posts << post
       end
     end
     @artists.each do |artist|
-      artist.posts.where(:created_at => date_start.beginning_of_day..date_end.end_of_day).order("created_at DESC").each do |post|
+      artist.posts.includes(:likes, :post_attachments, :comments).where(:created_at => date_start.beginning_of_day..date_end.end_of_day).order("created_at DESC").each do |post|
         @posts << post
       end
     end

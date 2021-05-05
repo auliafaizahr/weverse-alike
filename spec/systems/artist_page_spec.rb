@@ -32,7 +32,7 @@ RSpec.describe "User Activity", js:true, type: :system do
         fill_in 'date_filter', with: '04/11/2021 - 04/30/2021'
         find_button('Apply').click
         find_button('Filter').click
-        expect(page).to have_selector('.card-body', count: 2)
+        expect(page).to have_selector('.card-body', count: 0)
       end
 
       it 'filter artist and date but show no posts' do

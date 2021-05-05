@@ -53,15 +53,15 @@ class GroupsController < ApplicationController
   end
 
   def set_group_artists
-    @group_artists = JoinGroup.where(group_id: @group.id).joins(:user).where(users: {type_user: 0})
+    @group_artists = JoinGroup.where(group_id: @group.id).joins(:user).where(users: {type_user: 0}).includes(avatar_attachment: :blob)
   end
 
   def set_joined_groups
-    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
   end
 
   def set_other_groups
-    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
   end
 
 end

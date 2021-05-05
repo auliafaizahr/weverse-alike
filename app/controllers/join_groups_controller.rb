@@ -7,8 +7,8 @@ class JoinGroupsController < ApplicationController
   def new
     @title = "You havent join this"
     @user = current_user
-    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     respond_to do |format|
       format.html
       format.js { render layout: false }
@@ -31,8 +31,8 @@ class JoinGroupsController < ApplicationController
   end
 
   def edit
-    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     if current_user.Admin?
       @join_group = @group.join_groups.find(params[:id])
     else
@@ -61,7 +61,7 @@ class JoinGroupsController < ApplicationController
 
   def join_new
     # @join_group = @group.join_groups.find(params[:join_group_id])
-    @artists = User.artist.includes(:join_groups).where.not(id: JoinGroup.select(:user_id))
+    @artists = User.artist.where.not(id: JoinGroup.select(:user_id))
     respond_to do |format|
       format.js { render layout: false }
     end
