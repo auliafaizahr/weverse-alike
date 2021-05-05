@@ -3,12 +3,11 @@ class JoinGroupsController < ApplicationController
   before_action :set_group, only: [:index, :create, :new, :destroy, :edit, :update, :join_new]
   before_action :set_user, only: [:new, :destroy, :edit, :update, :create]
   before_action :set_join_group, only: [:destroy, :edit, :update]
+  before_action :set_joined_groups, only: [:new, :edit]
 
   def new
     @title = "You havent join this"
     @user = current_user
-    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     respond_to do |format|
       format.html
       format.js { render layout: false }
@@ -31,8 +30,6 @@ class JoinGroupsController < ApplicationController
   end
 
   def edit
-    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     if current_user.Admin?
       @join_group = @group.join_groups.find(params[:id])
     else
@@ -98,5 +95,10 @@ class JoinGroupsController < ApplicationController
 
   def join_group_params
     params.require(:join_group).permit(:username, :avatar, :user_id)
+  end
+
+  def set_joined_groups
+    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
   end
 end

@@ -2,13 +2,11 @@ class MediasController < ApplicationController
   layout "layouts/home"
   before_action :set_group
   before_action :set_media, only: [:show]
+  before_action :set_joined_groups, only: [:index, :show]
   # layout 'watch_layout', only: [:show]
 
   def index
     @user = current_user
-    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
-    
     if params[:category_id]
       @media_category = @group.media_video_categories.find(params[:category_id])
       @medias = @group.media_videos.where(media_video_category_id: params[:category_id])
@@ -16,7 +14,7 @@ class MediasController < ApplicationController
       @media_categories = @group.media_video_categories
       @medias = @group.media_videos
     end
-    
+
     respond_to do |format|
       format.html
       format.js
@@ -27,8 +25,6 @@ class MediasController < ApplicationController
   def show
     @comments = @media.comments
     @user = current_user
-    @joined_groups = Group.includes(:join_groups).where(id: JoinGroup.select(:group_id).where(user_id: @user))
-    @other_groups = Group.includes(:join_groups).where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
     render layout: "watch_layout"
   end
 
@@ -39,5 +35,10 @@ class MediasController < ApplicationController
 
   def set_media
     @media = MediaVideo.find(params[:id])
+  end
+
+  def set_joined_groups
+    @joined_groups = Group.where(id: JoinGroup.select(:group_id).where(user_id: @user))
+    @other_groups = Group.where.not(id: JoinGroup.select(:group_id).where(user_id: @user))
   end
 end
