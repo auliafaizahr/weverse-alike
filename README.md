@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Weverse Alike is a cloning fan-community app build by HYBE (the house of BTS), originally named 'Weverse' so I use its name related, Weverse Alike. Built using ruby on rails and deploy it in heroku.
 
-Things you may want to cover:
+Create fan posts and share beautiful photos for your favorite artists on Weverse.
 
-* Ruby version
+Show your support for fan creations and communicate with fans around the world with cheers, comments, and various events.
 
-* System dependencies
+### Technology I use
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby 2.6
+* Rails 6
+* Javascript
+* Webpack
+* SCSS
+* Bootstrap
+* Rspec
+* Selenium
+* Heroku
+* PostgreSQL
